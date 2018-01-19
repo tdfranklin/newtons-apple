@@ -21,5 +21,6 @@
   "homepage": "https://github.com/tdfranklin/newtons-apple#readme",
   "dependencies": {
     "commander": "^2.13.0"
-  }
+  },
+  "keywords": ["React", "React CLI", "React Generator"]
 }

@@ -4,7 +4,17 @@ Newton's Apple is a simple CLI to simplify component creation for developers wor
 
 # Installation
 
-This has not been published to NPM yet, but this will be updated once it is available on NPM.
+To install, first make sure you have Node installed:
+
+```
+$ node -v
+```
+
+If you get back a version number, you have Node installed and can install this via NPM:
+
+```
+$ npm install -g newtons-apple
+```
 
 # Usage
 

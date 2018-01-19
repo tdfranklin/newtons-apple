@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 'use strict';
 
-console.log("Hello from napp!");
+console.log("Hello from Newton's Apple!!");
