@@ -1,0 +1,25 @@
+{
+  "name": "newtons-apple",
+  "version": "0.0.1",
+  "description": "Simple React CLI to generate boilerplate code for components",
+  "main": "index.js",
+  "bin": {
+    "napp": "./bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdfranklin/newtons-apple.git"
+  },
+  "author": "Tyler D. Franklin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tdfranklin/newtons-apple/issues"
+  },
+  "homepage": "https://github.com/tdfranklin/newtons-apple#readme",
+  "dependencies": {
+    "commander": "^2.13.0"
+  }
+}
