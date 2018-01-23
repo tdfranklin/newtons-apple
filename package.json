@@ -2,9 +2,9 @@
   "name": "newtons-apple",
   "version": "0.0.2",
   "description": "Simple React CLI to generate boilerplate code for components",
-  "main": "index.js",
+  "main": "app.js",
   "bin": {
-    "napp": "./bin/index.js"
+    "napp": "./bin/app.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

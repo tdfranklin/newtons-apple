@@ -24,7 +24,7 @@ To use this tool, simply move into the directory you want the component installe
 
 ```
 $ cd projectName/components
-$ napp component componentName
+$ napp new componentName
 ```
 
 # Issues
