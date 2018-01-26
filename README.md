@@ -18,7 +18,7 @@ $ npm install -g newtons-apple
 
 # Usage
 
-To use this tool, simply move into the directory you want the component installed and then run the napp component command and it will create a file using the compoenntName that you specify (componentName.js) and inside of the file will already be the boilerplate code for a typical React component, including state, lifecycle methods, import, and export lines.  The component itself will also be named based off the name you specify.
+To use this tool, simply move into the directory you want the component created and then run the napp new command and it will create a file using the componentName that you specify (componentName.js) and inside of the file will already be the boilerplate code for a typical React component, including state, default props, lifecycle methods, import and export lines.  The component itself will also be named based off the name you specify.
 
 ### Example
 
@@ -26,6 +26,35 @@ To use this tool, simply move into the directory you want the component installe
 $ cd projectName/components
 $ napp new componentName
 ```
+
+By default, all React lifecycle methods are included.  However, you can customize this in two ways.  To disable all lifecycle methods, and thereby create a component with only the state, default props, render method, import and export lines, you can just pass either -n or --none to the command or to enable all lifecycle methods, pass -a or --all:
+
+### Example
+
+```
+$ napp new componentName -n
+$ napp new componentName -a
+```
+
+Lastly, if you only want to include certain lifecycle methods, you can customize by doing napp setup before creating your component:
+
+### Example
+
+```
+$ napp setup
+? Choose lifecycle methods (Press <space> to select, <a> to toggle all, <i> to inverse selection)
+❯◯ componentWillMount
+ ◯ componentWillReceiveProps
+ ◯ shouldComponentUpdate
+ ◯ componentWillUpdate
+ ◯ componentDidMount
+ ◯ componentDidUpdate
+ ◯ componentWillUnmount
+(Move up and down to reveal more choices)
+
+$ napp new componentName
+```
+Also please note that when you make a change, those changes will be saved as your default so all components you create will include those methods until you run setup again or pass --all or --none to the new command.
 
 # Issues
 
@@ -39,7 +68,6 @@ I welcome anyone who is interested to come help contribute on this project.  Ple
 
 I will try to keep an updated list here of features I plan to implement in this CLI.
 
-1. Set default lifecycle methods included when creating component.
-2. Add custom methods to be included in component creation.
-3. Redux support (create boilerplate code for projects that use Redux).
-4. Add default file structure support so command can be run from home directory and create files in correct location.
+1. Add custom methods to be included in component creation.
+2. Redux support (create boilerplate code for projects that use Redux).
+3. Add default file structure support so command can be run from home directory and create files in correct location.

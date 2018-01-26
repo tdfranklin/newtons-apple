@@ -1,6 +1,6 @@
 {
   "name": "newtons-apple",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Simple React CLI to generate boilerplate code for components",
   "main": "app.js",
   "bin": {
@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/tdfranklin/newtons-apple#readme",
   "dependencies": {
-    "commander": "^2.13.0"
+    "commander": "^2.13.0",
+    "configstore": "^3.1.1",
+    "inquirer": "^3.3.0"
   },
   "keywords": [
     "React",
