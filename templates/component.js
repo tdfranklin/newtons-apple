@@ -84,7 +84,9 @@ const componentTemplate = (name, willMount, willReceiveProps, shouldUpdate, will
 
     template +=
         `
-        export default ${name};`;
+    }
+
+export default ${name};`;
 
     return template;
 }
