@@ -18,14 +18,24 @@ $ npm install -g newtons-apple
 
 # Usage
 
-To use this tool, simply move into the directory you want the component created and then run the napp new command and it will create a file using the componentName that you specify (componentName.js) and inside of the file will already be the boilerplate code for a typical React component, including state, default props, lifecycle methods, import and export lines.  The component itself will also be named based off the name you specify.
+To use this tool, simply run the napp new command and it will create a file using the componentName that you specify (componentName.js) and inside of the file will already be the boilerplate code for a typical React component, including state, default props, lifecycle methods, import and export lines.  The component itself will also be named based off the name you specify.
 
 ### Example
 
 ```
-$ cd projectName/components
 $ napp new componentName
 ```
+
+This will create a file called componentName.js in your current directory with all of the boilerplate code for a React component.  If you want to create the file in another directory, simply include the path from your current directory in with the command like below:
+
+```
+$ napp new dirOne/dirTwo/componentName
+```
+
+This will create the component in current_directory/dirOne/dirTwo/componentName.js
+
+---
+---
 
 By default, all React lifecycle methods are included.  However, you can customize this in two ways.  To disable all lifecycle methods, and thereby create a component with only the state, default props, render method, import and export lines, you can just pass either -n or --none to the command or to enable all lifecycle methods, pass -a or --all:
 

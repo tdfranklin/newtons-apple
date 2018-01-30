@@ -25,7 +25,7 @@ const conf = new Configstore('napp-config', {
 program
     .version(pkg.version, '-v, --version')
     .command('new <component-name>')
-    .description('create new component in current directory')
+    .description('create new component in either current directory or provided path')
     .option("-a, --all", "enable all methods")
     .option("-n, --none", "disable all methods")
     .action( (component, options) => {
@@ -33,6 +33,7 @@ program
             changeAllSettings(true);
         if (options.none)
             changeAllSettings(false);
+        argValue = 'new';
         createComponent(component, conf.all)
     });
     // .action( component => {
@@ -43,6 +44,7 @@ program
     .command('setup')
     .description('select lifecycle methods to be included when creating components')
     .action( () => {
+        argValue = 'setup';
         inquirer.prompt(questions).then((answers) => {
             changeAllSettings(false);
             for (let answer of answers.methods) {
