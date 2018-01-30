@@ -6,10 +6,9 @@ const Configstore = require('configstore');
 const inquirer = require('inquirer');
 const pkg = require('../package.json');
 const createComponent = require('../lib/create-component');
-const questions = require('../lib/questions');
+const questions = require('./questions');
 const changeAllSettings = require('./helpers');
 let argValue;
-// const util = require('util');
 
 const conf = new Configstore('napp-config', {
     componentWillMount: true,
@@ -28,17 +27,15 @@ program
     .description('create new component in either current directory or provided path')
     .option("-a, --all", "enable all methods")
     .option("-n, --none", "disable all methods")
+    .option("-c, --create", "creates directories if they don't exist")
     .action( (component, options) => {
         if (options.all)
             changeAllSettings(true);
         if (options.none)
             changeAllSettings(false);
         argValue = 'new';
-        createComponent(component, conf.all)
+        createComponent(component, options.create, conf.all)
     });
-    // .action( component => {
-    //     console.log(util.inspect(conf, {showHidden: true, depth: null}));
-    // });
 
 program
     .command('setup')

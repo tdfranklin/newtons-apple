@@ -32,7 +32,11 @@ This will create a file called componentName.js in your current directory with a
 $ napp new dirOne/dirTwo/componentName
 ```
 
-This will create the component in current_directory/dirOne/dirTwo/componentName.js
+This will create the component in current_directory/dirOne/dirTwo/componentName.js if that directory exists.  If you would like to create the directory path if it doesn't already exist, just make sure to add the -c or --create option on the command:
+
+```
+$ napp new dirOne/dirTwo/componentName -c
+```
 
 ---
 ---

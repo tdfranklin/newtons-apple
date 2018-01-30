@@ -84,8 +84,7 @@ if (didCatch)
 `;
 
 template +=
-`
-}
+`}
 
 export default ${name};`;
 
