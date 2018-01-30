@@ -8,6 +8,7 @@ const pkg = require('../package.json');
 const createComponent = require('../lib/create-component');
 const questions = require('../lib/questions');
 const changeAllSettings = require('./helpers');
+let argValue;
 // const util = require('util');
 
 const conf = new Configstore('napp-config', {
@@ -40,6 +41,7 @@ program
 
 program
     .command('setup')
+    .description('select lifecycle methods to be included when creating components')
     .action( () => {
         inquirer.prompt(questions).then((answers) => {
             changeAllSettings(false);
@@ -49,4 +51,16 @@ program
         });
     });
 
+program
+    .arguments('<arg>')
+    .action((arg) => {
+        argValue = arg;
+        console.error(`Sorry, ${arg} is not a valid command!  Please use -h or --help for valid commands.`);
+    });
+
 program.parse(process.argv);
+
+if (typeof argValue === 'undefined') {
+    console.error('No command given!  Please use -h or --help for valid commands.');
+    process.exit(1);
+}
