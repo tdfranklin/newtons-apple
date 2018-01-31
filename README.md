@@ -1,4 +1,7 @@
 # NEWTONS APPLE
+[![npm version](https://badge.fury.io/js/newtons-apple.svg)](https://badge.fury.io/js/newtons-apple)
+[![npm](https://img.shields.io/npm/dt/newtons-apple.svg)]()
+[![npm](https://img.shields.io/npm/l/newtons-apple.svg)]()
 
 Newton's Apple is a simple CLI to simplify component creation for developers working on ReactJS projects.  Running a simple command, it will create a file with the name you specify and generate all of the boilerplate code for a React component.
 
