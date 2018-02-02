@@ -1,6 +1,6 @@
 {
   "name": "newtons-apple",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Simple React CLI to generate boilerplate code for components",
   "main": "app.js",
   "bin": {
@@ -22,6 +22,7 @@
   "dependencies": {
     "commander": "^2.13.0",
     "configstore": "^3.1.1",
+    "fs-extra": "^5.0.0",
     "inquirer": "^3.3.0"
   },
   "keywords": [

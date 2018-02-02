@@ -28,13 +28,14 @@ program
     .option("-a, --all", "enable all methods")
     .option("-n, --none", "disable all methods")
     .option("-c, --create", "creates directories if they don't exist")
+    .option("-o, --overwrite", "overwrites file if it exists")
     .action( (component, options) => {
         if (options.all)
             changeAllSettings(true);
         if (options.none)
             changeAllSettings(false);
         argValue = 'new';
-        createComponent(component, options.create, conf.all)
+        createComponent(component, options.create, options.overwrite, conf.all)
     });
 
 program

@@ -42,6 +42,14 @@ This will create the component in current_directory/dirOne/dirTwo/componentName.
 $ napp new dirOne/dirTwo/componentName -c
 ```
 
+If you try to create a file that already exists, you will get an error.  However, if you would like to overwrite the file, simple pass the -o or --overwrite option.  Also, you are able to chain commands:
+
+```
+$ napp new dirOne/dirTwo/componentName -aco
+```
+
+The above command would create a file current_directory/dirOne/dirTwo/componentName.js with all lifecycle methods added.  It would create the path if it did not exist and if there was already a file called componentName.js in that path, it would overwrite it.
+
 ---
 ---
 
