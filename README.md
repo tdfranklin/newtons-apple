@@ -26,10 +26,61 @@ To use this tool, simply run the napp new command and it will create a file usin
 ### Example
 
 ```
-$ napp new componentName
+$ napp new myComponent
 ```
 
-This will create a file called componentName.js in your current directory with all of the boilerplate code for a React component.  If you want to create the file in another directory, simply include the path from your current directory in with the command like below:
+This will create a file called componentName.js in your current directory with all of the boilerplate code for a React component:
+
+``` javascript
+import React, { Component } from 'react';
+
+class myComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        };
+    };
+
+    static defaultProps = {
+    }
+
+    componentWillMount() {
+    }
+
+    componentWillReceiveProps(nextProps){
+    }
+
+    shouldComponentUpdate(nextProps, nextState){
+    }
+
+    componentWillUpdate(nextProps, nextState){
+    }
+
+    render() {
+        return (
+            <div>
+                <h3>Hello World</h3>
+            </div>
+        );
+    }
+
+    componentDidMount() {
+    }
+
+    componentDidUpdate(prevProps, prevState){
+    }
+
+    componentWillUnmount() {
+    }
+
+    componentDidCatch(error, info){
+    }
+}
+
+export default myComponent;
+```
+
+If you want to create the file in another directory, simply include the path from your current directory in with the command like below:
 
 ```
 $ napp new dirOne/dirTwo/componentName
@@ -70,6 +121,33 @@ First, to disable all lifecycle methods, and thereby create a component with onl
 ```
 $ napp new componentName --none
 $ napp new componentName -a
+```
+
+A file with no lifecycle methods will look like:
+
+``` javascript
+import React, { Component } from 'react';
+
+class myComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        };
+    };
+
+    static defaultProps = {
+    }
+
+    render() {
+        return (
+            <div>
+                <h3>Hello World</h3>
+            </div>
+        );
+    }
+}
+
+export default myComponent;
 ```
 
 You are also able to chain multiple options together:
