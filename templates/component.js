@@ -1,6 +1,6 @@
 'use strict';
 
-const componentTemplate = (name, willMount, willReceiveProps, shouldUpdate, willUpdate, didMount, didUpdate, willUnmount, didCatch) => {
+const componentTemplate = (name, includedMethods) => {
     let template =
 
 `import React, { Component } from 'react';
@@ -16,28 +16,28 @@ class ${name} extends Component {
     }
 `;
 
-if (willMount)
+if (includedMethods.componentWillMount)
     template +=
 `
     componentWillMount() {
     }
 `;
 
-if (willReceiveProps)
+if (includedMethods.componentWillReceiveProps)
     template +=
 `
     componentWillReceiveProps(nextProps){
     }
 `;
 
-if (shouldUpdate)
+if (includedMethods.shouldComponentUpdate)
     template +=
 `
     shouldComponentUpdate(nextProps, nextState){
     }
 `;
 
-if (willUpdate)
+if (includedMethods.componentWillUpdate)
     template +=
 `
     componentWillUpdate(nextProps, nextState){
@@ -55,28 +55,28 @@ template +=
     }
 `;
 
-if (didMount)
+if (includedMethods.componentDidMount)
     template +=
 `
     componentDidMount() {
     }
 `;
 
-if (didUpdate)
+if (includedMethods.componentDidUpdate)
     template +=
 `
     componentDidUpdate(prevProps, prevState){
     }
 `;
 
-if (willUnmount)
+if (includedMethods.componentWillUnmount)
     template +=
 `
     componentWillUnmount() {
     }
 `;
 
-if (didCatch)
+if (includedMethods.componentDidCatch)
     template +=
 `
     componentDidCatch(error, info){
