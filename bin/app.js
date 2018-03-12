@@ -25,6 +25,7 @@ program
     .version(pkg.version, '-v, --version')
     .command('new <component-name>')
     .description('create new component in either current directory or provided path')
+    .option("-d, --dumb", "set component type to dumb, i.e. functional/stateless")
     .option("-a, --all", "enable all methods")
     .option("-n, --none", "disable all methods")
     .option("-c, --create", "creates directories if they don't exist")
@@ -35,7 +36,7 @@ program
         if (options.none)
             changeAllSettings(false);
         argValue = 'new';
-        createComponent(component, options.create, options.overwrite, conf.all)
+        createComponent(component, options.dumb, options.create, options.overwrite, conf.all)
     });
 
 program
