@@ -1,6 +1,6 @@
 {
   "name": "newtons-apple",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Simple React CLI to generate boilerplate code for components",
   "main": "app.js",
   "bin": {

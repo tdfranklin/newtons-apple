@@ -21,7 +21,46 @@ $ npm install -g newtons-apple
 
 # Usage
 
-To use this tool, simply run the napp new command and it will create a file using the componentName that you specify (componentName.js) and inside of the file will already be the boilerplate code for a typical React component, including state, default props, lifecycle methods, import and export lines.  The component itself will also be named based off the name you specify.
+## TLDR
+
+---
+
+Read below for detailed instructions on how to use Newton's Apple and the flags that you can include.  However, you can also use the -h or --help flag to see your various options:
+
+```
+$ napp -h
+
+    Usage: napp [options] [command] <arg>
+
+    Options:
+        -v, --version  output the version number
+        -h, --help     output usage information
+
+    Commands:
+        new [options] <component-name>  create new component in either current directory or provided path
+        setup                           select lifecycle methods to be included when creating components
+```
+
+```
+$ napp new --help
+
+    Usage: new [options] <component-name>
+
+    create new component in either current directory or provided path
+
+    Options:
+
+        -d, --dumb       set component type to dumb, i.e. functional/stateless
+        -a, --all        enable all methods
+        -n, --none       disable all methods
+        -c, --create     creates directories if they don't exist
+        -o, --overwrite  overwrites file if it exists
+        -h, --help       output usage information
+```
+
+---
+
+To use this tool, simply run the `napp new` command and it will create a file using the componentName that you specify (myComponent.js) and inside of the file will already be the boilerplate code for a typical React component, including state, default props, lifecycle methods, import and export lines.  The component itself will also be named based off the name you specify.
 
 ### Example
 
@@ -182,6 +221,31 @@ $ napp new componentName
 
 Also please note that when you make a change, those changes will be saved.  So all components you create with 'napp new' will include those methods until you either run setup again or pass -a/-n options to the napp new command.
 
+---
+## Dumb/Stateless Components
+
+If you want to create a stateless component, simply pass the -d or --dumb flag to the command:
+
+```
+$ napp new myDumbComponent -d
+```
+
+Will create a file named myDumbComponent.js that looks like this:
+
+```javascript
+import React from 'react';
+
+const myDumbComponent = (props) => {
+  return (
+    <div>
+      <h3>Hello World</h3>
+    </div>
+  );
+};
+
+export default myDumbComponent;
+```
+
 # Issues
 
 If you run into any issues using this tool, please first search the issues in the repo to make sure it has not already been reported.  If you don't find anything, please feel free to open a new issue.
@@ -196,6 +260,7 @@ If you would like to resolve any issues or add a feature yourself, please be sur
 
 I will try to keep an updated list here of features I plan to implement in this CLI.
 
-1. Redux support (create boilerplate code for projects that use Redux).
-2. Add default file structure support.
-3. Add custom methods to be included in component creation.
+1. Jest support (create boilerplate for Jest tests for components).
+2. Redux support (create boilerplate code for projects that use Redux). 
+3. Add default file structure support.
+4. Add custom methods to be included in component creation.
