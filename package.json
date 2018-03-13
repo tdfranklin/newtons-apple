@@ -7,7 +7,7 @@
     "napp": "./bin/app.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -30,5 +30,7 @@
     "React CLI",
     "React Generator"
   ],
-  "devDependencies": {}
+  "devDependencies": {
+    "jest": "^22.4.2"
+  }
 }
