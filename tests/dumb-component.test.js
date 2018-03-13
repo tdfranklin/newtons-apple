@@ -1,6 +1,6 @@
-const dumbComponentTemplate = require('../templates/dumbComponent');
+const dumbComponentTemplate = require('../templates/dumb-component');
 
-describe('dumbComponent', () => {
+describe('dumbComponentTemplate', () => {
   it('includes the correct name variable', () => {
     const name = 'UglyButton';
     const dumbReturnVal = dumbComponentTemplate(name);

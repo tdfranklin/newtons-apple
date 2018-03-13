@@ -1,6 +1,6 @@
 const componentTemplate = require('../templates/component');
 
-describe('component', () => {
+describe('componentTemplate', () => {
   it('includes the correct name variable', () => {
     const name = 'ComplicatedButton';
     const includedMethods = {
