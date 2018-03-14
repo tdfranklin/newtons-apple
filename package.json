@@ -7,7 +7,7 @@
     "napp": "./bin/app.js"
   },
   "scripts": {
-    "test": "jest --watch"
+    "test": "jest --watch --silent"
   },
   "repository": {
     "type": "git",
@@ -32,5 +32,8 @@
   ],
   "devDependencies": {
     "jest": "^22.4.2"
+  },
+  "jest": {
+    "watchPathIgnorePatterns": ["test-components"]
   }
 }
