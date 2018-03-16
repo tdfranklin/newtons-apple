@@ -30,13 +30,13 @@ class ${name} extends Component {
     componentWillMount() {
     }
 
-    componentWillReceiveProps(nextProps){
+    componentWillReceiveProps(nextProps) {
     }
 
-    shouldComponentUpdate(nextProps, nextState){
+    shouldComponentUpdate(nextProps, nextState) {
     }
 
-    componentWillUpdate(nextProps, nextState){
+    componentWillUpdate(nextProps, nextState) {
     }
 
     render() {
@@ -50,13 +50,13 @@ class ${name} extends Component {
     componentDidMount() {
     }
 
-    componentDidUpdate(prevProps, prevState){
+    componentDidUpdate(prevProps, prevState) {
     }
 
     componentWillUnmount() {
     }
 
-    componentDidCatch(error, info){
+    componentDidCatch(error, info) {
     }
 }
 
@@ -94,10 +94,10 @@ class ${name} extends Component {
     componentWillMount() {
     }
 
-    componentWillReceiveProps(nextProps){
+    componentWillReceiveProps(nextProps) {
     }
 
-    componentWillUpdate(nextProps, nextState){
+    componentWillUpdate(nextProps, nextState) {
     }
 
     render() {
