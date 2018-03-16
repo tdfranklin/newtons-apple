@@ -60,20 +60,20 @@ $ napp new --help
 
 ---
 
-To use this tool, simply run the `napp new` command and it will create a file using the componentName that you specify (myComponent.js) and inside of the file will already be the boilerplate code for a typical React component, including state, default props, lifecycle methods, import and export lines.  The component itself will also be named based off the name you specify.
+To use this tool, simply run the `napp new` command and it will create a file using the componentName that you specify (MyComponent.js) and inside of the file will already be the boilerplate code for a typical React component, including state, default props, lifecycle methods, import and export lines.  The component itself will also be named based off the name you specify.
 
 ### Example
 
 ```
-$ napp new myComponent
+$ napp new MyComponent
 ```
 
-This will create a file called componentName.js in your current directory with all of the boilerplate code for a React component:
+This will create a file called MyComponent.js in your current directory with all of the boilerplate code for a React component:
 
 ``` javascript
 import React, { Component } from 'react';
 
-class myComponent extends Component {
+class MyComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -116,16 +116,16 @@ class myComponent extends Component {
     }
 }
 
-export default myComponent;
+export default MyComponent;
 ```
 
 If you want to create the file in another directory, simply include the path from your current directory in with the command like below:
 
 ```
-$ napp new dirOne/dirTwo/componentName
+$ napp new dirOne/dirTwo/ComponentName
 ```
 
-This will create the component in current_directory/dirOne/dirTwo/componentName.js.  You will get an error back if either that directory does not exist OR if there is already a file in that directory with the name you specified.  However, there are two options you can pass to resolve these issues.
+This will create the component in current_directory/dirOne/dirTwo/ComponentName.js.  You will get an error back if either that directory does not exist OR if there is already a file in that directory with the name you specified.  However, there are two options you can pass to resolve these issues.
 
 ---
 ### CREATE PATH
@@ -133,10 +133,10 @@ This will create the component in current_directory/dirOne/dirTwo/componentName.
 If you would like to create the directory path if it doesn't already exist, just make sure to add the -c or --create option on the command:
 
 ```
-$ napp new dirOne/dirTwo/componentName -c
+$ napp new dirOne/dirTwo/ComponentName -c
 ```
 
-This will check to see if current_directory/dirOne/dirTwo exists.  If it exists already, it will create componentName.js in this directory.  If it doesn't exist, it will create the directories, then create componentName.js.
+This will check to see if current_directory/dirOne/dirTwo exists.  If it exists already, it will create ComponentName.js in this directory.  If it doesn't exist, it will create the directories, then create ComponentName.js.
 
 ---
 ### OVERWRITE FILE
@@ -144,7 +144,7 @@ This will check to see if current_directory/dirOne/dirTwo exists.  If it exists 
 If you would like to overwrite the file if it already exists, simply pass the -o or --overwrite option.
 
 ```
-$ napp new dirOne/dirTwo/componentName -o
+$ napp new dirOne/dirTwo/ComponentName -o
 ```
 
 ---
@@ -158,8 +158,8 @@ First, to disable all lifecycle methods, and thereby create a component with onl
 ### Example
 
 ```
-$ napp new componentName --none
-$ napp new componentName -a
+$ napp new ComponentName --none
+$ napp new ComponentName -a
 ```
 
 A file with no lifecycle methods will look like:
@@ -167,7 +167,7 @@ A file with no lifecycle methods will look like:
 ``` javascript
 import React, { Component } from 'react';
 
-class myComponent extends Component {
+class MyComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -186,16 +186,16 @@ class myComponent extends Component {
     }
 }
 
-export default myComponent;
+export default MyComponent;
 ```
 
 You are also able to chain multiple options together:
 
 ```
-$ napp new dirOne/dirTwo/componentName -aco
+$ napp new dirOne/dirTwo/ComponentName -aco
 ```
 
-The above command would create a file current_directory/dirOne/dirTwo/componentName.js with all lifecycle methods added.  It would create the path if it did not exist and if there was already a file called componentName.js in that path, it would overwrite it.
+The above command would create a file current_directory/dirOne/dirTwo/ComponentName.js with all lifecycle methods added.  It would create the path if it did not exist and if there was already a file called ComponentName.js in that path, it would overwrite it.
 
 ---
 ## NAPP SETUP
@@ -216,7 +216,7 @@ $ napp setup
  ◯ componentWillUnmount
 (Move up and down to reveal more choices)
 
-$ napp new componentName
+$ napp new ComponentName
 ```
 
 Also please note that when you make a change, those changes will be saved.  So all components you create with 'napp new' will include those methods until you either run setup again or pass -a/-n options to the napp new command.
@@ -227,7 +227,7 @@ Also please note that when you make a change, those changes will be saved.  So a
 If you want to create a stateless component, simply pass the -d or --dumb flag to the command:
 
 ```
-$ napp new myDumbComponent -d
+$ napp new MyDumbComponent -d
 ```
 
 Will create a file named myDumbComponent.js that looks like this:
@@ -235,15 +235,15 @@ Will create a file named myDumbComponent.js that looks like this:
 ```javascript
 import React from 'react';
 
-const myDumbComponent = (props) => {
-  return (
-    <div>
-      <h3>Hello World</h3>
-    </div>
-  );
+const MyDumbComponent = (props) => {
+    return (
+        <div>
+            <h3>Hello World</h3>
+        </div>
+    );
 };
 
-export default myDumbComponent;
+export default MyDumbComponent;
 ```
 
 # Issues

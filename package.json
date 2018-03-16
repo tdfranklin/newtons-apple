@@ -1,13 +1,14 @@
 {
   "name": "newtons-apple",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Simple React CLI to generate boilerplate code for components",
   "main": "app.js",
   "bin": {
     "napp": "./bin/app.js"
   },
   "scripts": {
-    "test": "jest --watch --silent"
+    "test": "jest",
+    "test-watch": "jest --watch --silent" 
   },
   "repository": {
     "type": "git",
