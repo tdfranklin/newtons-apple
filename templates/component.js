@@ -26,21 +26,21 @@ if (includedMethods.componentWillMount)
 if (includedMethods.componentWillReceiveProps)
     template +=
 `
-    componentWillReceiveProps(nextProps){
+    componentWillReceiveProps(nextProps) {
     }
 `;
 
 if (includedMethods.shouldComponentUpdate)
     template +=
 `
-    shouldComponentUpdate(nextProps, nextState){
+    shouldComponentUpdate(nextProps, nextState) {
     }
 `;
 
 if (includedMethods.componentWillUpdate)
     template +=
 `
-    componentWillUpdate(nextProps, nextState){
+    componentWillUpdate(nextProps, nextState) {
     }
 `;
 
@@ -65,7 +65,7 @@ if (includedMethods.componentDidMount)
 if (includedMethods.componentDidUpdate)
     template +=
 `
-    componentDidUpdate(prevProps, prevState){
+    componentDidUpdate(prevProps, prevState) {
     }
 `;
 
@@ -79,7 +79,7 @@ if (includedMethods.componentWillUnmount)
 if (includedMethods.componentDidCatch)
     template +=
 `
-    componentDidCatch(error, info){
+    componentDidCatch(error, info) {
     }
 `;
 

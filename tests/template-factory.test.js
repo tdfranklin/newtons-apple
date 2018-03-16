@@ -1,46 +1,54 @@
 const getComponentTemplate = require('../lib/template-factory');
 
 describe('getComponentTemplate', () => {
-  let includedMethods;
+    let includedMethods;
 
-  beforeAll(() => {
-    includedMethods = {
-      componentWillMount: true,
-      componentWillReceiveProps: true,
-      shouldComponentUpdate: true,
-      componentWillUpdate: true,
-      componentDidMount: true,
-      componentDidUpdate: true,
-      componentWillUnmount: true,
-      componentDidCatch: true
-    };
-  });
+    beforeAll(() => {
+        includedMethods = {
+            componentWillMount: true,
+            componentWillReceiveProps: true,
+            shouldComponentUpdate: true,
+            componentWillUpdate: true,
+            componentDidMount: true,
+            componentDidUpdate: true,
+            componentWillUnmount: true,
+            componentDidCatch: true
+        };
+    });
 
-  it('calls the dumbComponentTemplate correctly', () => {
-    const componentName = 'UglyButton';
-    const isDumb = true;
-    const returnedTemplate = getComponentTemplate(componentName, isDumb, includedMethods);
-    const expectedTemplate =
+    it('calls the dumbComponentTemplate correctly', () => {
+        const componentName = 'UglyButton';
+        const isDumb = true;
+        const returnedTemplate = getComponentTemplate(
+            componentName,
+            isDumb,
+            includedMethods
+        );
+        const expectedTemplate =
 `import React from 'react';
 
 const ${componentName} = (props) => {
-  return (
-    <div>
-      <h3>Hello World</h3>
-    </div>
-  );
+    return (
+        <div>
+            <h3>Hello World</h3>
+        </div>
+    );
 };
 
 export default ${componentName};`;
 
-    expect(returnedTemplate).toBe(expectedTemplate);
-  });
+        expect(returnedTemplate).toBe(expectedTemplate);
+    });
 
-  it('calls the componentTemplate correctly', () => {
-    const componentName = 'ComplicatedButton';
-    const isDumb = false;
-    const returnedTemplate = getComponentTemplate(componentName, isDumb, includedMethods);
-    const expectedTemplate =
+    it('calls the componentTemplate correctly', () => {
+        const componentName = 'ComplicatedButton';
+        const isDumb = false;
+        const returnedTemplate = getComponentTemplate(
+            componentName,
+            isDumb,
+            includedMethods
+        );
+        const expectedTemplate =
 `import React, { Component } from 'react';
 
 class ${componentName} extends Component {
@@ -56,13 +64,13 @@ class ${componentName} extends Component {
     componentWillMount() {
     }
 
-    componentWillReceiveProps(nextProps){
+    componentWillReceiveProps(nextProps) {
     }
 
-    shouldComponentUpdate(nextProps, nextState){
+    shouldComponentUpdate(nextProps, nextState) {
     }
 
-    componentWillUpdate(nextProps, nextState){
+    componentWillUpdate(nextProps, nextState) {
     }
 
     render() {
@@ -76,18 +84,18 @@ class ${componentName} extends Component {
     componentDidMount() {
     }
 
-    componentDidUpdate(prevProps, prevState){
+    componentDidUpdate(prevProps, prevState) {
     }
 
     componentWillUnmount() {
     }
 
-    componentDidCatch(error, info){
+    componentDidCatch(error, info) {
     }
 }
 
 export default ${componentName};`;
 
-    expect(returnedTemplate).toBe(expectedTemplate);
-  });
+        expect(returnedTemplate).toBe(expectedTemplate);
+    });
 });
