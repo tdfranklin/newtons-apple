@@ -35,7 +35,7 @@ describe('createTest', () => {
 
         expect(check1).toBe(false);
 
-        createTest(testFilePath, false, false);
+        createTest(testFilePath, false);
 
         // wait a second before running check2
         return await timeOut().then(async () => {
@@ -51,7 +51,7 @@ describe('createTest', () => {
             expect(res).toEqual('Beat you to it');
         });
 
-        createTest(testFilePath, false, false);
+        createTest(testFilePath, false);
 
         contents = await readFile().then(res => {
             expect(res).toEqual('Beat you to it');
@@ -64,28 +64,10 @@ describe('createTest', () => {
             expect(res).toEqual('Beat you to it');
         });
 
-        createTest(testFilePath, false, true);
+        createTest(testFilePath, true);
 
         contents = await readFile().then(res => {
             expect(res).not.toEqual('Beat you to it');
-        });
-    });
-
-    it('creates directory/directories if createDir is true', async () => {
-        const testWithDirPath = path.normalize(
-            path.resolve(tempTestsDirPath, 'i-am-your-father', compName)
-        );
-        let check1 = await pathCheck(testWithDirPath);
-        let check2;
-        expect(check1).toBe(false);
-
-        createTest(testWithDirPath, true, false);
-
-        // wait a second before running check2
-        return await timeOut().then(async () => {
-            check2 = await pathCheck(testWithDirPath);
-            expect(check2).toBe(true);
-            fs.emptyDir(tempTestsDirPath);
         });
     });
 });

@@ -40,7 +40,7 @@ program
         argValue = 'new';
         createComponent(component, options.dumb, options.create, options.overwrite, conf.all);
         if(options.test)
-            createTest(component, options.create, options.overwrite);
+            createTest(component, options.overwrite);
     });
 
 program
