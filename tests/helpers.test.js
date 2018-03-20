@@ -32,7 +32,7 @@ describe('changeAllSettings', () => {
         };
 
         expect(conf.all).toEqual(settings);
-        changeAllSettings(conf, true);
+        changeAllSettings(true, conf);
         expect(conf.all).toEqual(expectedSettings);
         settings = expectedSettings;
     });
@@ -50,7 +50,7 @@ describe('changeAllSettings', () => {
         };
 
         expect(conf.all).toEqual(settings);
-        changeAllSettings(conf, false);
+        changeAllSettings(false, conf);
         expect(conf.all).toEqual(expectedSettings);
     });
 });

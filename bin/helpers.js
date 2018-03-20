@@ -3,7 +3,7 @@
 const Configstore = require('configstore');
 const conf = new Configstore('napp-config');
 
-const changeAllSettings = (store=conf, bool) => {
+const changeAllSettings = (bool, store=conf) => {
     store.set({
         componentWillMount: bool,
         componentWillReceiveProps: bool,
