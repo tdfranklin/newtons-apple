@@ -82,19 +82,18 @@ describe('createComponent', () => {
     });
 
     it('creates directory/directories if createDir is true', async () => {
-        console.error = jest.fn();
         const compWithDirPath = path.normalize(
             path.resolve(testCompsPath, 'i-am-your-father', name)
         );
-        let check1 = await pathCheck(compPath);
+        let check1 = await pathCheck(compWithDirPath);
         let check2;
         expect(check1).toBe(false);
 
-        createComponent(compPath, false, true, false, options);
+        createComponent(compWithDirPath, false, true, false, options);
 
         // wait a second before running check2
         return await timeOut().then(async () => {
-            check2 = await pathCheck(compPath);
+            check2 = await pathCheck(compWithDirPath);
             expect(check2).toBe(true);
             fs.emptyDir(testCompsPath);
         });

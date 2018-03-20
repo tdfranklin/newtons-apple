@@ -6,6 +6,7 @@ const Configstore = require('configstore');
 const inquirer = require('inquirer');
 const pkg = require('../package.json');
 const createComponent = require('../lib/create-component');
+const createTest = require('../lib/create-test');
 const questions = require('./questions');
 const changeAllSettings = require('./helpers');
 let argValue;
@@ -30,13 +31,16 @@ program
     .option("-n, --none", "disable all methods")
     .option("-c, --create", "creates directories if they don't exist")
     .option("-o, --overwrite", "overwrites file if it exists")
+    .option("-t, --test", "creates test file for new component")
     .action( (component, options) => {
         if (options.all)
             changeAllSettings(true);
         if (options.none)
             changeAllSettings(false);
         argValue = 'new';
-        createComponent(component, options.dumb, options.create, options.overwrite, conf.all)
+        createComponent(component, options.dumb, options.create, options.overwrite, conf.all);
+        if(options.test)
+            createTest(component, options.create, options.overwrite);
     });
 
 program

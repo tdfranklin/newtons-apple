@@ -1,4 +1,4 @@
-const getComponentTemplate = require('../lib/template-factory');
+const templateFactory = require('../lib/template-factory');
 
 describe('getComponentTemplate', () => {
     let includedMethods;
@@ -18,11 +18,9 @@ describe('getComponentTemplate', () => {
 
     it('calls the dumbComponentTemplate correctly', () => {
         const componentName = 'UglyButton';
-        const isDumb = true;
-        const returnedTemplate = getComponentTemplate(
-            componentName,
-            isDumb,
-            includedMethods
+        const returnedTemplate = templateFactory(
+            'DUMB_COMPONENT',
+            componentName
         );
         const expectedTemplate =
 `import React from 'react';
@@ -42,10 +40,9 @@ export default ${componentName};`;
 
     it('calls the componentTemplate correctly', () => {
         const componentName = 'ComplicatedButton';
-        const isDumb = false;
-        const returnedTemplate = getComponentTemplate(
+        const returnedTemplate = templateFactory(
+            'COMPONENT',
             componentName,
-            isDumb,
             includedMethods
         );
         const expectedTemplate =
@@ -97,5 +94,30 @@ class ${componentName} extends Component {
 export default ${componentName};`;
 
         expect(returnedTemplate).toBe(expectedTemplate);
+    });
+
+    it('calls the componentTestTemplate correctly', () => {
+        const componentName = 'UglyButton';
+        const returnedTemplate = templateFactory(
+            'COMPONENT_TEST',
+            componentName
+        );
+        const expectedTemplate =
+`import React from 'react';
+import ReactDOM from 'react-dom';
+import ${componentName} from './${componentName}';
+
+describe('${componentName}', () => {
+    it('renders without crashing', () => {
+        const div = document.createElement('div');
+        ReactDOM.render(<${componentName} />, div);
+    });
+});`;
+
+        expect(returnedTemplate).toBe(expectedTemplate);
+    });
+
+    it('throws an error if template argument passed is not an accepted case', () => {
+        expect(() => templateFactory('class_component')).toThrowError('A valid template string must be passed as the first arguement');
     });
 });
