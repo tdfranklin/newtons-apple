@@ -19,7 +19,8 @@ const conf = new Configstore('napp-config', {
     componentDidMount: true,
     componentDidUpdate: true,
     componentWillUnmount: true,
-    componentDidCatch: true
+    componentDidCatch: true,
+    autoGenerateTests: false
 });
 
 program
@@ -39,13 +40,13 @@ program
             changeAllSettings(false);
         argValue = 'new';
         createComponent(component, options.dumb, options.create, options.overwrite, conf.all);
-        if(options.test)
+        if(conf.all.autoGenerateTests || options.test)
             createTest(component, options.overwrite);
     });
 
 program
     .command('setup')
-    .description('select lifecycle methods to be included when creating components')
+    .description('configure options to be included when creating components')
     .action( () => {
         argValue = 'setup';
         inquirer.prompt(questions).then((answers) => {
@@ -53,6 +54,7 @@ program
             for (let answer of answers.methods) {
                 conf.set(answer, true);
             }
+            conf.set('autoGenerateTests', answers.autoGenerateTests)
         });
     });
 
