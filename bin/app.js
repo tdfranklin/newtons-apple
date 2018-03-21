@@ -40,7 +40,7 @@ program
             changeAllSettings(false);
         argValue = 'new';
         createComponent(component, options.dumb, options.create, options.overwrite, conf.all);
-        if(conf.all.autoGenerateTests || options.test)
+        if(conf.get('autoGenerateTests') || options.test)
             createTest(component, options.overwrite);
     });
 
