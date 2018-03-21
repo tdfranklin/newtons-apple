@@ -7,8 +7,8 @@
     "napp": "./bin/app.js"
   },
   "scripts": {
-    "test": "jest",
-    "test-watch": "jest --watch --silent" 
+    "test": "jest --silent",
+    "test-watch": "jest --watch --silent"
   },
   "repository": {
     "type": "git",
@@ -35,6 +35,6 @@
     "jest": "^22.4.2"
   },
   "jest": {
-    "watchPathIgnorePatterns": ["test-components"]
+    "watchPathIgnorePatterns": ["temp-create-file-directory", "temp-write-file-directory"]
   }
 }

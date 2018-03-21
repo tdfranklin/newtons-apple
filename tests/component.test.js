@@ -78,7 +78,8 @@ export default ${name};`;
             componentDidCatch: false
         };
         const compReturnVal = componentTemplate(name, includedMethods);
-        const expectedTemplate = `import React, { Component } from 'react';
+        const expectedTemplate =
+`import React, { Component } from 'react';
 
 class ${name} extends Component {
     constructor(props) {

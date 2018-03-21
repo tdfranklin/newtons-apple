@@ -5,10 +5,9 @@ const program = require ('commander');
 const Configstore = require('configstore');
 const inquirer = require('inquirer');
 const pkg = require('../package.json');
-const createComponent = require('../lib/create-component');
-const createTest = require('../lib/create-test');
+const createFile = require('../lib/create-file');
 const questions = require('./questions');
-const changeAllSettings = require('./helpers');
+const { changeAllSettings } = require('./helpers');
 let argValue;
 
 const conf = new Configstore('napp-config', {
@@ -39,9 +38,9 @@ program
         if (options.none)
             changeAllSettings(false);
         argValue = 'new';
-        createComponent(component, options.dumb, options.create, options.overwrite, conf.all);
+        createFile('COMPONENT', component, options.dumb, options.create, options.overwrite, conf.all);
         if(conf.get('autoGenerateTests') || options.test)
-            createTest(component, options.overwrite);
+            createFile('COMPONENT_TEST', component, options.overwrite);
     });
 
 program
