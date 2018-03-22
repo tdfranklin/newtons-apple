@@ -7,7 +7,7 @@ const inquirer = require('inquirer');
 const pkg = require('../package.json');
 const createFile = require('../lib/create-file');
 const questions = require('./questions');
-const { changeAllSettings } = require('./helpers');
+const { changeAllSettings } = require('./bin-helpers');
 let argValue;
 
 const conf = new Configstore('napp-config', {

@@ -162,4 +162,9 @@ describe('${compName}', () => {
             fs.emptyDir(tempTestsDirPath);
         });
     });
+
+    it('throws an error if type argument passed is not an accepted case', () => {
+        expect(() => createFile('component_test', testFilePath, false))
+            .toThrowError('A valid type string must be passed as the first arguement');
+    });
 });
