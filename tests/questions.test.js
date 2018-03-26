@@ -1,4 +1,4 @@
-const questions = require('../bin/questions');
+const {selectQuestions} = require('../bin/questions');
 
 describe('questions', () => {
     it('holds the correct value', () => {
@@ -20,6 +20,6 @@ describe('questions', () => {
             }
         ];
 
-        expect(questions).toEqual(expectedVal);
+        expect(selectQuestions).toEqual(expectedVal);
     });
 });

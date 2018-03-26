@@ -2,24 +2,12 @@
 'use strict';
 
 const program = require ('commander');
-const Configstore = require('configstore');
 const inquirer = require('inquirer');
 const pkg = require('../package.json');
 const createComponent = require('../lib/create-component');
-const questions = require('./questions');
-const changeAllSettings = require('./helpers');
+const {selectQuestions, setupQuestions} = require('./questions');
+const {changeAllSettings, nappConfig, setupProject} = require('./configstore');
 let argValue;
-
-const conf = new Configstore('napp-config', {
-    componentWillMount: true,
-    componentWillReceiveProps: true,
-    shouldComponentUpdate: true,
-    componentWillUpdate: true,
-    componentDidMount: true,
-    componentDidUpdate: true,
-    componentWillUnmount: true,
-    componentDidCatch: true
-});
 
 program
     .version(pkg.version, '-v, --version')
@@ -36,19 +24,33 @@ program
         if (options.none)
             changeAllSettings(false);
         argValue = 'new';
-        createComponent(component, options.dumb, options.create, options.overwrite, conf.all)
+        createComponent(component, options.dumb, options.create, options.overwrite, nappConfig.all)
+    });
+
+program
+    .command('select')
+    .description('select lifecycle methods to be included when creating components')
+    .action( () => {
+        argValue = 'select';
+        inquirer.prompt(selectQuestions).then((answers) => {
+            changeAllSettings(false);
+            for (let answer of answers.methods) {
+                nappConfig.set(answer, true);
+            }
+        });
     });
 
 program
     .command('setup')
-    .description('select lifecycle methods to be included when creating components')
-    .action( () => {
+    .description('configure options for Newton\'s Apple')
+    .action(() => {
         argValue = 'setup';
-        inquirer.prompt(questions).then((answers) => {
-            changeAllSettings(false);
-            for (let answer of answers.methods) {
-                conf.set(answer, true);
+        inquirer.prompt(setupQuestions).then((answers) => {
+            if (!answers.correctDir) {
+                console.log("Please run napp setup again from the root directory");
+                return;
             }
+            setupProject(answers.changeProject, answers.projectName, answers.componentPath);
         });
     });
 
