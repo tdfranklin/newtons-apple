@@ -4,7 +4,7 @@
 const program = require ('commander');
 const inquirer = require('inquirer');
 const pkg = require('../package.json');
-const createComponent = require('../lib/create-component');
+const processConfig = require('../lib/process-config');
 const {selectQuestions, setupQuestions} = require('./questions');
 const {changeAllSettings, nappConfig, setupProject} = require('./configstore');
 let argValue;
@@ -24,7 +24,7 @@ program
         if (options.none)
             changeAllSettings(false);
         argValue = 'new';
-        createComponent(component, options.dumb, options.create, options.overwrite, nappConfig.all)
+        processConfig(component, options, nappConfig.all)
     });
 
 program
