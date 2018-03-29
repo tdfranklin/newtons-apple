@@ -1,12 +1,12 @@
-const createComponent = require('../lib/create-component');
+const processConfig = require('../lib/process-config');
 const fs = require('fs-extra');
 const path = require('path');
 
-describe('createComponent', () => {
-    let name, options, testCompsPath, compPath, pathCheck, readFile, timeOut;
+describe('processConfig', () => {
+    let name, config, options, testCompsPath, compPath, pathCheck, readFile, timeOut;
     beforeAll(() => {
         name = 'ComplicatedButton';
-        options = {
+        config = {
             componentWillMount: true,
             componentWillReceiveProps: true,
             shouldComponentUpdate: true,
@@ -15,6 +15,11 @@ describe('createComponent', () => {
             componentDidUpdate: true,
             componentWillUnmount: true,
             componentDidCatch: true
+        };
+        options = {
+            dumb: false,
+            create: false,
+            overwrite: false
         };
         testCompsPath = path.normalize(
             path.resolve(__dirname, 'test-components')
@@ -45,7 +50,7 @@ describe('createComponent', () => {
 
         expect(check1).toBe(false);
 
-        createComponent(compPath, false, false, false, options);
+        processConfig(compPath, options, config);
 
         // wait a second before running check2
         return await timeOut().then(async () => {
@@ -61,7 +66,7 @@ describe('createComponent', () => {
             expect(res).toEqual('Beat you to it');
         });
 
-        createComponent(compPath, false, false, false, options);
+        processConfig(compPath, options, config);
 
         contents = await readFile().then(res => {
             expect(res).toEqual('Beat you to it');
@@ -74,7 +79,8 @@ describe('createComponent', () => {
             expect(res).toEqual('Beat you to it');
         });
 
-        createComponent(compPath, false, false, true, options);
+        options.overwrite = true;
+        processConfig(compPath, options, config);
 
         contents = await readFile().then(res => {
             expect(res).not.toEqual('Beat you to it');
@@ -90,7 +96,8 @@ describe('createComponent', () => {
         let check2;
         expect(check1).toBe(false);
 
-        createComponent(compPath, false, true, false, options);
+        options.create = true;
+        processConfig(compPath, options, config);
 
         // wait a second before running check2
         return await timeOut().then(async () => {

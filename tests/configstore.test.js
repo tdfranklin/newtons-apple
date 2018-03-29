@@ -1,4 +1,4 @@
-const changeAllSettings = require('../bin/helpers');
+const {changeAllSettings} = require('../bin/configstore');
 const Configstore = require('configstore');
 
 describe('changeAllSettings', () => {
