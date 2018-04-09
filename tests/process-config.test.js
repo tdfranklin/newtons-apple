@@ -50,7 +50,7 @@ describe('processConfig', () => {
 
         expect(check1).toBe(false);
 
-        processConfig(compPath, options, config);
+        processConfig('COMPONENT', compPath, options, config);
 
         // wait a second before running check2
         return await timeOut().then(async () => {
@@ -66,7 +66,7 @@ describe('processConfig', () => {
             expect(res).toEqual('Beat you to it');
         });
 
-        processConfig(compPath, options, config);
+        processConfig('COMPONENT', compPath, options, config);
 
         contents = await readFile().then(res => {
             expect(res).toEqual('Beat you to it');
@@ -80,7 +80,7 @@ describe('processConfig', () => {
         });
 
         options.overwrite = true;
-        processConfig(compPath, options, config);
+        processConfig('COMPONENT', compPath, options, config);
 
         contents = await readFile().then(res => {
             expect(res).not.toEqual('Beat you to it');
@@ -97,7 +97,7 @@ describe('processConfig', () => {
         expect(check1).toBe(false);
 
         options.create = true;
-        processConfig(compPath, options, config);
+        processConfig('COMPONENT', compPath, options, config);
 
         // wait a second before running check2
         return await timeOut().then(async () => {

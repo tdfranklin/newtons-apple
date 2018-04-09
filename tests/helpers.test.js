@@ -1,4 +1,4 @@
-const { writeFile } = require('../lib/lib-helpers');
+const { writeFile } = require('../lib/helpers');
 const fs = require('fs-extra');
 const path = require('path');
 

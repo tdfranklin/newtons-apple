@@ -6,14 +6,23 @@ describe('changeAllSettings', () => {
     beforeAll(() => {
         conf = new Configstore('test-napp-config');
         settings = {
-            componentWillMount: false,
-            componentWillReceiveProps: false,
-            shouldComponentUpdate: false,
-            componentWillUpdate: false,
-            componentDidMount: false,
-            componentDidUpdate: false,
-            componentWillUnmount: false,
-            componentDidCatch: false
+            componentWillMount: true,
+            componentWillReceiveProps: true,
+            shouldComponentUpdate: true,
+            componentWillUpdate: true,
+            componentDidMount: true,
+            componentDidUpdate: true,
+            componentWillUnmount: true,
+            componentDidCatch: true,
+            autoGenerateTests: false,
+            currentProject: null,
+            projects: {
+                testing: {
+                    rootDir: null,
+                    componentDir: null,
+                    testsDir: null
+                }
+            }
         };
 
         conf.set(settings);
@@ -28,7 +37,16 @@ describe('changeAllSettings', () => {
             componentDidMount: true,
             componentDidUpdate: true,
             componentWillUnmount: true,
-            componentDidCatch: true
+            componentDidCatch: true,
+            autoGenerateTests: false,
+            currentProject: null,
+            projects: {
+                testing: {
+                    rootDir: null,
+                    componentDir: null,
+                    testsDir: null
+                }
+            }
         };
 
         expect(conf.all).toEqual(settings);
@@ -46,7 +64,16 @@ describe('changeAllSettings', () => {
             componentDidMount: false,
             componentDidUpdate: false,
             componentWillUnmount: false,
-            componentDidCatch: false
+            componentDidCatch: false,
+            autoGenerateTests: false,
+            currentProject: null,
+            projects: {
+                testing: {
+                    rootDir: null,
+                    componentDir: null,
+                    testsDir: null
+                }
+            }
         };
 
         expect(conf.all).toEqual(settings);

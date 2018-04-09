@@ -1,18 +1,30 @@
 const createFile = require('../lib/create-file');
+const { formatCompPath } = require('../lib/helpers');
 const fs = require('fs-extra');
 const path = require('path');
+const Configstore = require('configstore');
 
 describe('createFile', () => {
     let compName,
         options,
+        includedMethods,
         tempTestsDirPath,
         testFilePath,
         pathCheck,
         readFile,
-        timeOut;
+        timeOut,
+        nappConfig;
     beforeAll(() => {
         compName = 'EvilButton';
         options = {
+            dumb: false,
+            all: false,
+            none: false,
+            create: false,
+            overwrite: false,
+            test: false
+        };
+        includedMethods = {
             componentWillMount: true,
             componentWillReceiveProps: true,
             shouldComponentUpdate: false,
@@ -40,6 +52,27 @@ describe('createFile', () => {
                 setTimeout(() => resolve(), 100);
             });
         };
+
+        nappConfig = new Configstore('test-napp-config');
+        nappConfig.set({
+            componentWillMount: true,
+            componentWillReceiveProps: true,
+            shouldComponentUpdate: true,
+            componentWillUpdate: true,
+            componentDidMount: true,
+            componentDidUpdate: true,
+            componentWillUnmount: true,
+            componentDidCatch: true,
+            autoGenerateTests: false,
+            currentProject: null,
+            projects: {
+                testing: {
+                    rootDir: null,
+                    componentDir: null,
+                    testsDir: null
+                }
+            }
+        });
     });
 
     beforeEach(() => fs.mkdirs(tempTestsDirPath));
@@ -89,7 +122,7 @@ export default ${compName};`;
 
         expect(check1).toBe(false);
 
-        createFile('COMPONENT', testFilePath, false, false, false, options);
+        createFile('COMPONENT', compName, testFilePath, options, includedMethods);
 
         // wait before running check2
         return await timeOut().then(async () => {
@@ -120,7 +153,9 @@ export default ${compName};`;
 
         expect(check1).toBe(false);
 
-        createFile('COMPONENT', testFilePath, true, false, false);
+        options.dumb = true
+
+        createFile('COMPONENT', compName, testFilePath, options, includedMethods);
 
         // wait before running check2
         return await timeOut().then(async () => {
@@ -130,6 +165,7 @@ export default ${compName};`;
                 expect(res).toEqual(expectedFileContent);
             });
             fs.emptyDir(tempTestsDirPath);
+            options.dumb = false;
         });
     });
 
@@ -137,7 +173,7 @@ export default ${compName};`;
         const expectedFileContent =
 `import React from 'react';
 import ReactDOM from 'react-dom';
-import ${compName} from './${compName}';
+import ${compName} from '${formatCompPath(compName, nappConfig)}';
 
 describe('${compName}', () => {
     it('renders without crashing', () => {
@@ -150,7 +186,7 @@ describe('${compName}', () => {
 
         expect(check1).toBe(false);
 
-        createFile('COMPONENT_TEST', testFilePath, false);
+        createFile('COMPONENT_TEST', compName, testFilePath, options, {}, nappConfig);
 
         // wait before running check2
         return await timeOut().then(async () => {

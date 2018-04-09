@@ -1,7 +1,9 @@
+const Configstore = require('configstore');
+const { formatCompPath } = require('../lib/helpers');
 const templateFactory = require('../lib/template-factory');
 
 describe('getComponentTemplate', () => {
-    let includedMethods;
+    let includedMethods, nappConfig;
 
     beforeAll(() => {
         includedMethods = {
@@ -14,6 +16,26 @@ describe('getComponentTemplate', () => {
             componentWillUnmount: true,
             componentDidCatch: true
         };
+        nappConfig = new Configstore('test-napp-config');
+        nappConfig.set({
+            componentWillMount: true,
+            componentWillReceiveProps: true,
+            shouldComponentUpdate: true,
+            componentWillUpdate: true,
+            componentDidMount: true,
+            componentDidUpdate: true,
+            componentWillUnmount: true,
+            componentDidCatch: true,
+            autoGenerateTests: false,
+            currentProject: null,
+            projects: {
+                testing: {
+                    rootDir: null,
+                    componentDir: null,
+                    testsDir: null
+                }
+            }
+        });
     });
 
     it('calls the dumbComponentTemplate correctly', () => {
@@ -100,7 +122,8 @@ export default ${componentName};`;
         const componentName = 'UglyButton';
         const returnedTemplate = templateFactory(
             'COMPONENT_TEST',
-            componentName
+            componentName,
+            nappConfig
         );
         const expectedTemplate =
 `import React from 'react';
