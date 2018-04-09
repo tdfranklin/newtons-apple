@@ -7,27 +7,43 @@
 
 [![NPM](https://nodei.co/npm/newtons-apple.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/newtons-apple/)
 
-Newton's Apple is a Command Line Interface(CLI) tool to simplify component creation for developers working on ReactJS projects.  Running a simple command, it will create a file with the name you specify and generate the boilerplate code for a typical React component.
+Newton's Apple(NAPP) is a Command Line Interface(CLI) tool to simplify component creation for developers working on ReactJS projects.  Running a simple command, it will create a file with the name you specify and generate the boilerplate code for a typical React component.
 
-# Installation
+You can also configure default path's on where to save files created with NAPP.  And soon NAPP will provide the ability to create other files commonly used with React (tests, Redux files, etc).  Please read the docs thoroughly to learn more.
+
+---
+
+## NAVIGATION
+
+* [Home](#newtons-apple)
+  * [Installation](#installation)
+  * [Help Menu](#help-menu)
+  * [Issues](#issues)
+  * [Contributing](#contributing)
+  * [Upcoming Features](#upcoming-features)
+* [Basic Usage (napp new)](./docs/BASIC-USAGE.md)
+* [Lifecycle Methods (napp select)](./docs/LIFECYCLE-METHODS.md)
+* [Configuration (napp setup)](./docs/CONFIGURATION.md)
+
+---
+
+## INSTALLATION
 
 To install, first make sure you have Node installed.  If you see a version number, you will be able to install Newton's Apple via NPM as below:
 
-```
+``` shell
 $ node -v
 v8.9.4
 $ npm install -g newtons-apple
 ```
 
-# Usage
-
-## TLDR
-
 ---
 
-Read below for detailed instructions on how to use Newton's Apple and the flags that you can include.  However, you can also use the -h or --help flag to see your various options:
+## HELP MENU
 
-```
+There are a lot of commands and options in NAPP and more are being added all the time, so it's understandable that you won't be able to remember them all off the top of your head.  Hopefully, the in-app help menu will help you there.  Simply use the -h or --help flag to see your various options:
+
+``` shell
 $ napp -h
 
     Usage: napp [options] [command] <arg>
@@ -38,10 +54,11 @@ $ napp -h
 
     Commands:
         new [options] <component-name>  create new component in either current directory or provided path
-        setup                           select lifecycle methods to be included when creating components
+        select                          select lifecycle methods to be included when creating components
+        setup                           configure options for Newton's Apple
 ```
 
-```
+``` shell
 $ napp new --help
 
     Usage: new [options] <component-name>
@@ -60,207 +77,26 @@ $ napp new --help
 
 ---
 
-To use this tool, simply run the `napp new` command and it will create a file using the componentName that you specify (MyComponent.js) and inside of the file will already be the boilerplate code for a typical React component, including state, default props, lifecycle methods, import and export lines.  The component itself will also be named based off the name you specify.
-
-### Example
-
-```
-$ napp new MyComponent
-```
-
-This will create a file called MyComponent.js in your current directory with all of the boilerplate code for a React component:
-
-``` javascript
-import React, { Component } from 'react';
-
-class MyComponent extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    };
-
-    static defaultProps = {
-    }
-
-    componentWillMount() {
-    }
-
-    componentWillReceiveProps(nextProps){
-    }
-
-    shouldComponentUpdate(nextProps, nextState){
-    }
-
-    componentWillUpdate(nextProps, nextState){
-    }
-
-    render() {
-        return (
-            <div>
-                <h3>Hello World</h3>
-            </div>
-        );
-    }
-
-    componentDidMount() {
-    }
-
-    componentDidUpdate(prevProps, prevState){
-    }
-
-    componentWillUnmount() {
-    }
-
-    componentDidCatch(error, info){
-    }
-}
-
-export default MyComponent;
-```
-
-If you want to create the file in another directory, simply include the path from your current directory in with the command like below:
-
-```
-$ napp new dirOne/dirTwo/ComponentName
-```
-
-This will create the component in current_directory/dirOne/dirTwo/ComponentName.js.  You will get an error back if either that directory does not exist OR if there is already a file in that directory with the name you specified.  However, there are two options you can pass to resolve these issues.
-
----
-### CREATE PATH
-
-If you would like to create the directory path if it doesn't already exist, just make sure to add the -c or --create option on the command:
-
-```
-$ napp new dirOne/dirTwo/ComponentName -c
-```
-
-This will check to see if current_directory/dirOne/dirTwo exists.  If it exists already, it will create ComponentName.js in this directory.  If it doesn't exist, it will create the directories, then create ComponentName.js.
-
----
-### OVERWRITE FILE
-
-If you would like to overwrite the file if it already exists, simply pass the -o or --overwrite option.
-
-```
-$ napp new dirOne/dirTwo/ComponentName -o
-```
-
----
----
-## Lifecycle Method Options
-
-By default, all React lifecycle methods are included when you create a new component.  However, you can customize this in two ways.
-
-First, to disable all lifecycle methods, and thereby create a component with only the state, default props, render method, import and export lines, you can just pass either -n or --none to the command.  To enable all lifecycle methods, pass the -a or --all option:
-
-### Example
-
-```
-$ napp new ComponentName --none
-$ napp new ComponentName -a
-```
-
-A file with no lifecycle methods will look like:
-
-``` javascript
-import React, { Component } from 'react';
-
-class MyComponent extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    };
-
-    static defaultProps = {
-    }
-
-    render() {
-        return (
-            <div>
-                <h3>Hello World</h3>
-            </div>
-        );
-    }
-}
-
-export default MyComponent;
-```
-
-You are also able to chain multiple options together:
-
-```
-$ napp new dirOne/dirTwo/ComponentName -aco
-```
-
-The above command would create a file current_directory/dirOne/dirTwo/ComponentName.js with all lifecycle methods added.  It would create the path if it did not exist and if there was already a file called ComponentName.js in that path, it would overwrite it.
-
----
-## NAPP SETUP
-
-Lastly, if you only want to include certain lifecycle methods, you can customize by doing napp setup before creating your component:
-
-### Example
-
-```
-$ napp setup
-? Choose lifecycle methods (Press <space> to select, <a> to toggle all, <i> to inverse selection)
-❯◯ componentWillMount
- ◯ componentWillReceiveProps
- ◯ shouldComponentUpdate
- ◯ componentWillUpdate
- ◯ componentDidMount
- ◯ componentDidUpdate
- ◯ componentWillUnmount
-(Move up and down to reveal more choices)
-
-$ napp new ComponentName
-```
-
-Also please note that when you make a change, those changes will be saved.  So all components you create with 'napp new' will include those methods until you either run setup again or pass -a/-n options to the napp new command.
-
----
-## Dumb/Stateless Components
-
-If you want to create a stateless component, simply pass the -d or --dumb flag to the command:
-
-```
-$ napp new MyDumbComponent -d
-```
-
-Will create a file named myDumbComponent.js that looks like this:
-
-```javascript
-import React from 'react';
-
-const MyDumbComponent = (props) => {
-    return (
-        <div>
-            <h3>Hello World</h3>
-        </div>
-    );
-};
-
-export default MyDumbComponent;
-```
-
-# Issues
+## ISSUES
 
 If you run into any issues using this tool, please first search the issues in the repo to make sure it has not already been reported.  If you don't find anything, please feel free to open a new issue.
 
-# Contributing
+---
+
+## CONTRIBUTING
 
 I welcome anyone who is interested to come help contribute on this project.  The most important contribution you can make is to install and test the app.  Please leave feedback on what you like, didn't like, any features you would like to see added, and create issues for any bugs you find!
 
-If you would like to resolve any issues or add a feature yourself, please be sure to read the [Code of Conduct](https://github.com/tdfranklin/newtons-apple/blob/master/CODE_OF_CONDUCT.md) and [Contributing](https://github.com/tdfranklin/newtons-apple/blob/master/CONTRIBUTING.md) before submitting any pull requests.
+If you would like to resolve any issues or add a feature yourself, please be sure to read the [Code of Conduct](./CODE_OF_CONDUCT.md) and [Contributing](./CONTRIBUTING.md) before submitting any pull requests.
 
-# Upcoming Features
+---
+
+## UPCOMING FEATURES
 
 I will try to keep an updated list here of features I plan to implement in this CLI.
 
 1. Jest support (create boilerplate for Jest tests for components).
-2. Redux support (create boilerplate code for projects that use Redux). 
-3. Add default file structure support.
-4. Add custom methods to be included in component creation.
+2. Redux support (create boilerplate code for projects that use Redux).
+3. Add custom methods to be included in component creation.
+
+---
