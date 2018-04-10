@@ -153,9 +153,7 @@ export default ${compName};`;
 
         expect(check1).toBe(false);
 
-        options.dumb = true
-
-        createFile('COMPONENT', compName, testFilePath, options, includedMethods);
+        createFile('DUMB_COMPONENT', compName, testFilePath, options, includedMethods);
 
         // wait before running check2
         return await timeOut().then(async () => {
@@ -200,7 +198,7 @@ describe('${compName}', () => {
     });
 
     it('throws an error if type argument passed is not an accepted case', () => {
-        expect(() => createFile('component_test', testFilePath, false))
-            .toThrowError('A valid type string must be passed as the first arguement');
+        expect(() => createFile('component_test', compName, testFilePath))
+            .toThrowError('A valid fileType string must be passed as the first arguement');
     });
 });

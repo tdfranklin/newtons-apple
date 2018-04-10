@@ -48,11 +48,6 @@ const changeProject = () => {
 const setupQuestions = [
     {
         type: 'confirm',
-        message: 'Would you like to auto-generate tests?',
-        name: 'autoGenerateTests'
-    },
-    {
-        type: 'confirm',
         message: `Is (${process.cwd()}) the project root directory?`,
         name: 'correctDir',
         default: false
@@ -90,6 +85,12 @@ const setupQuestions = [
         name: 'componentPath',
         validate: validateData(),
         when: correctDir('changeCompPath')
+    },
+    {
+        type: 'confirm',
+        message: 'Would you like to auto-generate tests?',
+        name: 'autoGenerateTests',
+        when: correctDir()
     },
     {
         type: 'confirm',

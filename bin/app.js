@@ -19,13 +19,17 @@ program
     .option('-c, --create', "creates directories if they don't exist")
     .option('-o, --overwrite', 'overwrites file if it exists')
     .option('-t, --test', 'creates test file for new component')
-    .action((component, options) => {
+    .action((componentName, options) => {
         if (options.all) changeAllSettings(true);
         if (options.none) changeAllSettings(false);
+
         argValue = 'new';
-        processConfig('COMPONENT', component, options, nappConfig.all);
-        if (nappConfig.get('autoGenerateTests') || options.test)
-            processConfig('COMPONENT_TEST', component, options, nappConfig.all);
+        const componentType = options.dumb ? 'DUMB_COMPONENT' : 'COMPONENT';
+
+        processConfig(componentType, componentName, options, nappConfig.all);
+        if (nappConfig.get('autoGenerateTests') || options.test) {
+            processConfig('COMPONENT_TEST', componentName, options, nappConfig.all);
+        }
     });
 
 program
