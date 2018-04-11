@@ -29,14 +29,14 @@ const changeAllSettings = (bool, store = nappConfig) => {
     });
 };
 
-const ifPathExists = (type, projects, projectName, path) => {
-    if (path) {
-        return path;
+const ifPathExists = (fileType, projects, projectName, filePath) => {
+    if (filePath) {
+        return filePath;
     }
 
     let project = projects[projectName];
 
-    switch (type) {
+    switch (fileType) {
         case 'COMPONENT':
             return project ? project.componentDir : null;
         case 'TEST':
@@ -46,11 +46,11 @@ const ifPathExists = (type, projects, projectName, path) => {
     }
 };
 
-const setupProject = (changeProject, name, componentPath, testsPath) => {
+const setupProject = (changeProject, name, componentPath, testsPath, config = nappConfig) => {
     let rootDir = path.resolve(process.cwd());
-    let currentProject = nappConfig.get('currentProject') || name;
+    let currentProject = config.get('currentProject') || name;
     let projectName = name || currentProject;
-    let projects = nappConfig.get('projects');
+    let projects = config.get('projects');
     let compPath = ifPathExists('COMPONENT', projects, projectName, componentPath);
     let componentDir = compPath ? path.resolve(rootDir, compPath) : null;
     let testPath = ifPathExists('TEST', projects, projectName, testsPath);
@@ -65,10 +65,10 @@ const setupProject = (changeProject, name, componentPath, testsPath) => {
         }
     };
 
-    nappConfig.set({
+    config.set({
         currentProject: projectName,
         projects: newProject
     });
 };
 
-module.exports = { nappConfig, changeAllSettings, setupProject };
+module.exports = { nappConfig, changeAllSettings, ifPathExists, setupProject };
