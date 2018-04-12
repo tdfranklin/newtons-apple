@@ -85,6 +85,26 @@ const setupQuestions = [
         name: 'componentPath',
         validate: validateData(),
         when: correctDir('changeCompPath')
+    },
+    {
+        type: 'confirm',
+        message: 'Would you like to auto-generate tests?',
+        name: 'autoGenerateTests',
+        when: correctDir()
+    },
+    {
+        type: 'confirm',
+        message: "Would you like to set or change a default path to save tests?",
+        name: 'changeTestsPath',
+        default: false,
+        when: correctDir()
+    },
+    {
+        type: 'input',
+        message: 'Please type the path (from current directory) to tests folder:',
+        name: 'testsPath',
+        validate: validateData(),
+        when: correctDir('changeTestsPath')
     }
 ];
 

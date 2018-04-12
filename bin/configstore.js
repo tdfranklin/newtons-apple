@@ -11,11 +11,12 @@ const nappConfig = new Configstore('napp-config', {
     componentDidUpdate: true,
     componentWillUnmount: true,
     componentDidCatch: true,
+    autoGenerateTests: false,
     currentProject: null,
     projects: {}
 });
 
-const changeAllSettings = (bool, store=nappConfig) => {
+const changeAllSettings = (bool, store = nappConfig) => {
     store.set({
         componentWillMount: bool,
         componentWillReceiveProps: bool,
@@ -28,34 +29,46 @@ const changeAllSettings = (bool, store=nappConfig) => {
     });
 };
 
-const ifPathExists = (projects, projectName, path) => {
-    if (path) {return path};
+const ifPathExists = (fileType, projects, projectName, filePath) => {
+    if (filePath) {
+        return filePath;
+    }
 
     let project = projects[projectName];
 
-    return project ? project.componentDir : null;
-}
+    switch (fileType) {
+        case 'COMPONENT':
+            return project ? project.componentDir : null;
+        case 'TEST':
+            return project ? project.testsDir : null;
+        default:
+            throw Error('A valid type string must be passed in as the first argument');
+    }
+};
 
-const setupProject = (changeProject, name, componentPath) => {
+const setupProject = (changeProject, name, componentPath, testsPath, config = nappConfig) => {
     let rootDir = path.resolve(process.cwd());
-    let currentProject = nappConfig.get('currentProject') || name;
+    let currentProject = config.get('currentProject') || name;
     let projectName = name || currentProject;
-    let projects = nappConfig.get('projects');
-    let compPath = ifPathExists(projects, projectName, componentPath);
+    let projects = config.get('projects');
+    let compPath = ifPathExists('COMPONENT', projects, projectName, componentPath);
     let componentDir = compPath ? path.resolve(rootDir, compPath) : null;
+    let testPath = ifPathExists('TEST', projects, projectName, testsPath);
+    let testsDir = testPath ? path.resolve(rootDir, testPath) : null;
 
     let newProject = {
         ...projects,
         [projectName]: {
             rootDir,
-            componentDir
+            componentDir,
+            testsDir
         }
-    }
+    };
 
-    nappConfig.set({
+    config.set({
         currentProject: projectName,
         projects: newProject
     });
 };
 
-module.exports = {nappConfig, changeAllSettings, setupProject};
+module.exports = { nappConfig, changeAllSettings, ifPathExists, setupProject };
