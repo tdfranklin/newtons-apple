@@ -20,16 +20,9 @@ program
     .option('-o, --overwrite', 'overwrites file if it exists')
     .option('-t, --test', 'creates test file for new component')
     .action((componentName, options) => {
-        if (options.all) changeAllSettings(true);
-        if (options.none) changeAllSettings(false);
-
         argValue = 'new';
-        const componentType = options.dumb ? 'DUMB_COMPONENT' : 'COMPONENT';
 
-        processConfig(componentType, componentName, options, nappConfig.all);
-        if (nappConfig.get('autoGenerateTests') || options.test) {
-            processConfig('COMPONENT_TEST', componentName, options, nappConfig.all);
-        }
+        processConfig('COMPONENT', componentName, options, nappConfig);
     });
 
 program
@@ -67,9 +60,7 @@ program
 
 program.arguments('<arg>').action(arg => {
     argValue = arg;
-    console.error(
-        `Sorry, ${arg} is not a valid command!  Please use -h or --help for valid commands.`
-    );
+    console.error(`Sorry, ${arg} is not a valid command!  Please use -h or --help for valid commands.`);
 });
 
 program.parse(process.argv);
