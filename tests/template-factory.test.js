@@ -141,6 +141,6 @@ describe('${componentName}', () => {
     });
 
     it('throws an error if template argument passed is not an accepted case', () => {
-        expect(() => templateFactory('class_component')).toThrowError('A valid template string must be passed as the first arguement');
+        expect(() => templateFactory('class_component')).toThrowError('A valid template string must be passed as the first argument');
     });
 });

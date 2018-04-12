@@ -216,6 +216,6 @@ describe('formatFilePath', () => {
     it("throws an error if a valid fileType isn't passed in", () => {
         const result = () => formatFilePath('COMP_TEST', fileName, testsPath);
 
-        expect(result).toThrow('A valid fileType string must be passed as the first arguement');
+        expect(result).toThrow('A valid fileType string must be passed as the first argument');
     });
 });
