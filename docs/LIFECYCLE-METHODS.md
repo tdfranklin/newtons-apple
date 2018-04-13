@@ -7,7 +7,9 @@
 * [Lifecycle Methods (napp select)](#lifecycle-methods)
   * [All/None Options](#options)
   * [NAPP Select](#napp-select)
+* [Create Tests](./TESTS.md)
 * [Configuration (napp setup)](./CONFIGURATION.md)
+* [View Config File (napp config)](./CONFIG.md)
 
 ---
 

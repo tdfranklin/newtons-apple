@@ -199,6 +199,6 @@ describe('${compName}', () => {
 
     it('throws an error if type argument passed is not an accepted case', () => {
         expect(() => createFile('component_test', compName, testFilePath))
-            .toThrowError('A valid fileType string must be passed as the first arguement');
+            .toThrowError('A valid fileType string must be passed as the first argument');
     });
 });

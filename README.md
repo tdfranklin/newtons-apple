@@ -23,7 +23,9 @@ You can also configure default path's on where to save files created with NAPP. 
   * [Upcoming Features](#upcoming-features)
 * [Basic Usage (napp new)](./docs/BASIC-USAGE.md)
 * [Lifecycle Methods (napp select)](./docs/LIFECYCLE-METHODS.md)
+* [Create Tests](./docs/TESTS.md)
 * [Configuration (napp setup)](./docs/CONFIGURATION.md)
+* [View Config File (napp config)](./docs/CONFIG.md)
 
 ---
 
@@ -56,6 +58,8 @@ $ napp -h
         new [options] <component-name>  create new component in either current directory or provided path
         select                          select lifecycle methods to be included when creating components
         setup                           configure options for Newton's Apple
+        config [options] [project]      view the options in your config file - including a project name will list the defaults for that project
+        reset                           reset NAPP to default usage where it only creates files in current directory
 ```
 
 ``` shell
@@ -72,6 +76,7 @@ $ napp new --help
         -n, --none       disable all methods
         -c, --create     creates directories if they don't exist
         -o, --overwrite  overwrites file if it exists
+        -t, --test       creates test file for new component
         -h, --help       output usage information
 ```
 
@@ -95,7 +100,7 @@ If you would like to resolve any issues or add a feature yourself, please be sur
 
 I will try to keep an updated list here of features I plan to implement in this CLI.
 
-1. Jest support (create boilerplate for Jest tests for components).
+1. Add support for other test suites (Mocha, Jasmine, etc).
 2. Redux support (create boilerplate code for projects that use Redux).
 3. Add custom methods to be included in component creation.
 

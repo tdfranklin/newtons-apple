@@ -71,4 +71,82 @@ const setupProject = (changeProject, name, componentPath, testsPath, config = na
     });
 };
 
-module.exports = { nappConfig, changeAllSettings, ifPathExists, setupProject };
+const processConfigView = (project, options) => {
+    console.log('------------------------------');
+    if (project) {
+        const projects = nappConfig.get('projects');
+        const currentProject = projects[project];
+        console.log(`SETTINGS FOR ${project}:`);
+        for (let key in currentProject) {
+            console.log(`${key}: ${currentProject[key]}`);
+        }
+        console.log('------------------------------');
+    }
+
+    if (options.current) {
+        const currentProject = nappConfig.get('currentProject');
+        console.log(`CURRENT PROJECT: ${currentProject}`);
+        console.log('------------------------------');
+    }
+
+    if (options.projects) {
+        console.log('PROJECT NAMES:');
+        const projects = nappConfig.get('projects');
+        for (let key in projects) {
+            console.log(key);
+        }
+        console.log('------------------------------');
+    }
+
+    if (options.methods) {
+        console.log('LIFECYCLE METHOD SETTINGS:')
+        for (let key in nappConfig.all) {
+            if (key === 'autoGenerateTests') break;
+            console.log(`${key}: ${nappConfig.all[key]}`);
+        }
+        console.log('------------------------------');
+    }
+
+    if (options.test) {
+        console.log('TEST SETTINGS:')
+        let message = nappConfig.get('autoGenerateTests') ?
+            'You are currently automatically generating tests' : 
+            'You are not currently generating tests automatically';
+        console.log(message);
+        console.log('------------------------------')
+    }
+
+    if (options.show) {
+        console.log('PATH TO CONFIG FILE:');
+        console.log(nappConfig.path);
+        console.log('------------------------------');
+    }
+    
+    if (options.open) {
+        const filePath = nappConfig.path;
+        const exec = require('child_process').exec;
+
+        const getCommandLine = () => {
+            switch(process.platform) {
+                case 'darwin' : return 'open';
+                case 'win32' : return 'start';
+                case 'win64' : return 'start';
+                default : return 'xdg-open';
+            }
+        };
+
+        const child = exec(`${getCommandLine()} ${filePath}`, (err, stdout, stderr) => {
+            if (err) console.error(err);
+        });
+        child.on('close', (code) => {
+            console.log('config opening...');
+        });
+    }
+
+    if (!project && !options.current && !options.projects && !options.methods && !options.test && !options.show && !options.open) {
+        console.log(nappConfig.all);
+        console.log('------------------------------');
+    }
+};
+
+module.exports = { nappConfig, changeAllSettings, ifPathExists, setupProject, processConfigView };
