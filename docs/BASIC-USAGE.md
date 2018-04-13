@@ -11,8 +11,11 @@
   * [Overwrite File](#overwrite-file)
   * [Dumb Components](#dumb-components)
   * [Chain Commands](#chain-commands)
+  * [Creating Tests](#creating-tests)
 * [Lifecycle Methods (napp select)](./LIFECYCLE-METHODS.md)
+* [Create Tests](./TESTS.md)
 * [Configuration (napp setup)](./CONFIGURATION.md)
+* [View Config File (napp config)](./CONFIG.md)
 
 ---
 
@@ -106,7 +109,7 @@ This will create the component in `current_directory/dirOne/dirTwo/ComponentName
 
 ---
 
-### CREATE PATH
+## CREATE PATH
 
 If you would like to create the directory path if it doesn't already exist, just make sure to add the -c or --create option on the command:
 
@@ -118,7 +121,7 @@ This will check to see if `current_directory/dirOne/dirTwo` exists.  If it exist
 
 ---
 
-### OVERWRITE FILE
+## OVERWRITE FILE
 
 If you would like to overwrite the file if it already exists, simply pass the -o or --overwrite option.
 
@@ -163,5 +166,13 @@ $ napp new dirOne/dirTwo/ComponentName -cod
 ```
 
 The above command would create a dumb component at `current_directory/dirOne/dirTwo/ComponentName.js`.  It would create the path if it did not exist and if there was already a file called ComponentName.js in that path, it would overwrite it.
+
+---
+
+## CREATING TESTS
+
+You are able to automatically create a test file when you create a component by passing the -t flag (eg. `napp new componentName -t`).
+
+Read more about the test feature [here](./TESTS.md).
 
 ---

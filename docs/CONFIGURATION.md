@@ -5,12 +5,16 @@
 * [Home](../README.md)
 * [Basic Usage (napp new)](./BASIC-USAGE.md)
 * [Lifecycle Methods (napp select)](./LIFECYCLE-METHODS.md)
+* [Create Tests](./TESTS.md)
 * [Configuration (napp setup)](#configuration)
   * [NAPP Setup](#napp-setup)
   * [Project Name](#project-name)
   * [Component Directory](#component-directory)
   * [Examples](#examples)
   * [Change Project](#change-project)
+  * [Generate Tests](#generate-tests)
+  * [Disable Pathing](#napp-reset)
+* [View Config File (napp config)](./CONFIG.md)
 
 ---
 
@@ -119,5 +123,34 @@ This would create a new project called `New App` and set it's component director
 
 >### Quick Tip:
 >All projects you create are saved in your config file, so if you want to move back to a previously created project, answer that you want to swap projects then type the name of a previously created project and it will still have the previous information you saved (such as the component directory path).  That way, you do not have to specify that information again.
+
+---
+
+## GENERATE TESTS
+
+You will also be given options to automatically generate tests and also set a default folder to save tests.  Continuing with the example above:
+
+``` shell
+~/root/myWebApp: napp setup
+
+? Is (~/root/myWebApp) the project root directory? Yes
+? You are currently working in (MyWebApp) - would you like to change projects? No
+? Would you like to set or change a default path to save components? Yes
+? Please type the path (from current directory) to component folder: app/components
+? Would you like to auto-generate tests? Yes
+? Would you like to set or change a default path to save tests? Yes
+? Please type the path (from current directory) to tests folder: app/tests
+```
+
+First, `Would you like to auto-generate tests?`  If you answer yes to this question, then until you turn it off, anytime you create a component, a test file will also be generated.  If you set a path, the test will be created in that directory otherwise it will be created in the same directory as the component.  You can read more about tests and see what the file will look like [here](./TESTS.md).
+
+---
+
+## NAPP RESET
+
+NAPP setup is a useful feature, but if you would like to turn it off and go back to the default usage of Newton's Apple (where the files are created in your current directory), you can simply run `napp reset`.  This will turn off all the default pathing created by running `napp setup` and it will simply go back to creating the files either in your current directory or in the directory you pass with the `napp new` command.
+
+>### Quick Tip:
+>Please note that the projects you have saved and paths you have set will not be deleted or altered in any way by running this command, only disabled.  You can easily re-enable the pathing by running `napp setup` again and passing in the project name for the project you wish to work on.
 
 ---
