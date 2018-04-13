@@ -35,6 +35,9 @@
     "jest": "^22.4.2"
   },
   "jest": {
-    "watchPathIgnorePatterns": ["temp-create-file-directory", "temp-write-file-directory"]
+    "watchPathIgnorePatterns": [
+      "temp-create-file-directory",
+      "temp-write-file-directory"
+    ]
   }
 }
