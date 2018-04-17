@@ -1,12 +1,14 @@
-const createComponent = require('../lib/create-component');
+const processConfig = require('../lib/process-config');
 const fs = require('fs-extra');
 const path = require('path');
+const Configstore = require('configstore');
 
-describe('createComponent', () => {
-    let name, options, testCompsPath, compPath, pathCheck, readFile, timeOut;
+describe('processConfig', () => {
+    let fileName, nappConfig, options, testCompsPath, compPath, pathCheck, readFile, timeOut;
     beforeAll(() => {
-        name = 'ComplicatedButton';
-        options = {
+        fileName = 'ComplicatedButton';
+        nappConfig = new Configstore('test-napp-config');
+        nappConfig.set({
             componentWillMount: true,
             componentWillReceiveProps: true,
             shouldComponentUpdate: true,
@@ -14,12 +16,26 @@ describe('createComponent', () => {
             componentDidMount: true,
             componentDidUpdate: true,
             componentWillUnmount: true,
-            componentDidCatch: true
+            componentDidCatch: true,
+            autoGenerateTests: false,
+            currentProject: null,
+            projects: {
+                testing: {
+                    rootDir: null,
+                    componentDir: null,
+                    testsDir: null
+                }
+            }
+        });
+        options = {
+            dumb: false,
+            create: false,
+            overwrite: false
         };
         testCompsPath = path.normalize(
             path.resolve(__dirname, 'test-components')
         );
-        compPath = path.normalize(path.resolve(testCompsPath, name));
+        compPath = path.normalize(path.resolve(testCompsPath, fileName));
 
         pathCheck = aPath => {
             return fs.pathExists(`${aPath}.js`);
@@ -45,7 +61,7 @@ describe('createComponent', () => {
 
         expect(check1).toBe(false);
 
-        createComponent(compPath, false, false, false, options);
+        processConfig('COMPONENT', compPath, options, nappConfig);
 
         // wait a second before running check2
         return await timeOut().then(async () => {
@@ -61,7 +77,7 @@ describe('createComponent', () => {
             expect(res).toEqual('Beat you to it');
         });
 
-        createComponent(compPath, false, false, false, options);
+        processConfig('COMPONENT', compPath, options, nappConfig);
 
         contents = await readFile().then(res => {
             expect(res).toEqual('Beat you to it');
@@ -74,7 +90,8 @@ describe('createComponent', () => {
             expect(res).toEqual('Beat you to it');
         });
 
-        createComponent(compPath, false, false, true, options);
+        options.overwrite = true;
+        processConfig('COMPONENT', compPath, options, nappConfig);
 
         contents = await readFile().then(res => {
             expect(res).not.toEqual('Beat you to it');
@@ -84,13 +101,14 @@ describe('createComponent', () => {
     it('creates directory/directories if createDir is true', async () => {
         console.error = jest.fn();
         const compWithDirPath = path.normalize(
-            path.resolve(testCompsPath, 'i-am-your-father', name)
+            path.resolve(testCompsPath, 'i-am-your-father', fileName)
         );
         let check1 = await pathCheck(compPath);
         let check2;
         expect(check1).toBe(false);
 
-        createComponent(compPath, false, true, false, options);
+        options.create = true;
+        processConfig('COMPONENT', compPath, options, nappConfig);
 
         // wait a second before running check2
         return await timeOut().then(async () => {

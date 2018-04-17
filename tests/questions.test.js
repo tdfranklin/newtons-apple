@@ -1,6 +1,6 @@
-const questions = require('../bin/questions');
+const { selectQuestions, setupQuestions } = require('../bin/questions');
 
-describe('questions', () => {
+describe('selectQuestions', () => {
     it('holds the correct value', () => {
         const expectedVal = [
             {
@@ -20,6 +20,6 @@ describe('questions', () => {
             }
         ];
 
-        expect(questions).toEqual(expectedVal);
+        expect(selectQuestions).toEqual(expectedVal);
     });
 });
