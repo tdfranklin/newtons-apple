@@ -1,3 +1,4 @@
+
 const Configstore = require('configstore');
 const { formatCompPath } = require('../lib/helpers');
 const templateFactory = require('../lib/template-factory');

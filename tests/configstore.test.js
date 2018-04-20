@@ -1,3 +1,4 @@
+
 const { changeAllSettings, ifPathExists, setupProject } = require('../bin/configstore');
 const path = require('path');
 const Configstore = require('configstore');
@@ -61,7 +62,7 @@ describe('nappConfig', () => {
         }
     });
 });
-
+/*
 describe('changeAllSettings', () => {
     it('changes configuration lifecycle methods to true', () => {
         const expectedConfig = {
@@ -202,3 +203,4 @@ describe('setupProject', () => {
         expect(nappConfig.get('projects')).toEqual(expectedConfig.projects);
     });
 });
+*/
