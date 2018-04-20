@@ -1,8 +1,8 @@
-const { nappConfig, changeAllSettings, ifPathExists, setupProject } = require('../bin/configstore');
+const { changeAllSettings, ifPathExists, setupProject } = require('../bin/configstore');
 const path = require('path');
 const Configstore = require('configstore');
 
-let configuration, testNappConfig, fileType, projectName, filePath;
+let configuration, nappConfig, fileType, projectName, filePath;
 beforeEach(() => {
     configuration = {
         componentWillMount: true,
@@ -23,11 +23,15 @@ beforeEach(() => {
             }
         }
     };
-    testNappConfig = new Configstore('test-napp-config');
-    testNappConfig.set(configuration);
+    nappConfig = new Configstore('test-napp-config');
+    nappConfig.set(configuration);
     fileType = 'COMPONENT';
     projectName = 'principia';
     filePath = 'Users/newton/mathematica/principia';
+});
+
+afterAll(() => {
+    nappConfig.clear()
 });
 
 describe('nappConfig', () => {
@@ -80,9 +84,9 @@ describe('changeAllSettings', () => {
             }
         };
 
-        expect(testNappConfig.all).toEqual(configuration);
-        changeAllSettings(true, testNappConfig);
-        expect(testNappConfig.all).toEqual(expectedConfig);
+        expect(nappConfig.all).toEqual(configuration);
+        changeAllSettings(true, nappConfig);
+        expect(nappConfig.all).toEqual(expectedConfig);
         configuration = expectedConfig;
     });
 
@@ -107,9 +111,9 @@ describe('changeAllSettings', () => {
             }
         };
 
-        expect(testNappConfig.all).toEqual(configuration);
-        changeAllSettings(false, testNappConfig);
-        expect(testNappConfig.all).toEqual(expectedConfig);
+        expect(nappConfig.all).toEqual(configuration);
+        changeAllSettings(false, nappConfig);
+        expect(nappConfig.all).toEqual(expectedConfig);
     });
 });
 
@@ -145,9 +149,9 @@ describe('setupProject', () => {
     it("set's the currentProject property of configstore to name", () => {
         const newProjectName = 'Arithmetica Universalis';
 
-        expect(testNappConfig.get('currentProject')).toEqual(projectName);
-        setupProject(false, newProjectName, null, null, testNappConfig);
-        expect(testNappConfig.get('currentProject')).toEqual(newProjectName);
+        expect(nappConfig.get('currentProject')).toEqual(projectName);
+        setupProject(false, newProjectName, null, null, nappConfig);
+        expect(nappConfig.get('currentProject')).toEqual(newProjectName);
     });
 
     it('creates a new project and sets it as a property of the configstore projects property', () => {
@@ -187,14 +191,14 @@ describe('setupProject', () => {
             }
         };
 
-        expect(testNappConfig.get('projects')['Arithmetica Universalis']).not.toBeDefined();
+        expect(nappConfig.get('projects')['Arithmetica Universalis']).not.toBeDefined();
         setupProject(
             false,
             newProjectName,
             newProjectCompPath,
             newProjectTestsPath,
-            testNappConfig
+            nappConfig
         );
-        expect(testNappConfig.get('projects')).toEqual(expectedConfig.projects);
+        expect(nappConfig.get('projects')).toEqual(expectedConfig.projects);
     });
 });

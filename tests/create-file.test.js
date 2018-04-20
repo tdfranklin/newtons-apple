@@ -75,6 +75,10 @@ describe('createFile', () => {
         });
     });
 
+    afterAll(() => {
+        nappConfig.clear()
+    });
+
     beforeEach(() => fs.mkdirs(tempTestsDirPath));
     afterEach(() => fs.remove(tempTestsDirPath));
 
