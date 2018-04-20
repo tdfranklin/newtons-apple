@@ -27,6 +27,10 @@ describe('componentTestTemplate', () => {
         });
     });
 
+    afterAll(() => {
+        nappConfig.clear()
+    });
+
     it('includes the correct name variable', () => {
         const name = 'ComplicatedButton';
         const compTestReturnVal = componentTestTemplate(name, nappConfig);

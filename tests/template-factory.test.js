@@ -38,6 +38,10 @@ describe('getComponentTemplate', () => {
         });
     });
 
+    afterAll(() => {
+        nappConfig.clear()
+    });
+
     it('calls the dumbComponentTemplate correctly', () => {
         const componentName = 'UglyButton';
         const returnedTemplate = templateFactory(
