@@ -1,5 +1,3 @@
-# Newton's Apple Issue Template
-
 ### Is this a bug report or feature request?
 
 _(Type answer here)_
