@@ -1,40 +1,38 @@
+
 const { changeAllSettings, ifPathExists, setupProject } = require('../bin/configstore');
 const path = require('path');
 const Configstore = require('configstore');
 
-let configuration, nappConfig, fileType, projectName, filePath;
-beforeEach(() => {
-    configuration = {
-        componentWillMount: true,
-        componentWillReceiveProps: true,
-        shouldComponentUpdate: true,
-        componentWillUpdate: true,
-        componentDidMount: true,
-        componentDidUpdate: true,
-        componentWillUnmount: true,
-        componentDidCatch: true,
-        autoGenerateTests: false,
-        currentProject: 'principia',
-        projects: {
-            principia: {
-                rootDir: 'Users/newton/mathematica/principia',
-                componentDir: 'Users/newton/mathematica/principia/components',
-                testsDir: 'Users/newton/mathematica/principia/tests'
-            }
-        }
-    };
-    nappConfig = new Configstore('test-napp-config');
-    nappConfig.set(configuration);
-    fileType = 'COMPONENT';
-    projectName = 'principia';
-    filePath = 'Users/newton/mathematica/principia';
-});
-
-afterAll(() => {
-    nappConfig.clear()
-});
-
 describe('nappConfig', () => {
+    let configuration, nappConfig;
+    beforeAll(() => {
+        configuration = {
+            componentWillMount: true,
+            componentWillReceiveProps: true,
+            shouldComponentUpdate: true,
+            componentWillUpdate: true,
+            componentDidMount: true,
+            componentDidUpdate: true,
+            componentWillUnmount: true,
+            componentDidCatch: true,
+            autoGenerateTests: false,
+            currentProject: 'principia',
+            projects: {
+                principia: {
+                    rootDir: 'Users/newton/mathematica/principia',
+                    componentDir: 'Users/newton/mathematica/principia/components',
+                    testsDir: 'Users/newton/mathematica/principia/tests'
+                }
+            }
+        };
+        nappConfig = new Configstore('nc-napp-config');
+        nappConfig.set(configuration);
+    });
+
+    afterAll(() => {
+        nappConfig.clear()
+    });
+
     it('contains the correct properties', () => {
         const expectedConfig = {
             componentWillMount: true,
@@ -63,6 +61,35 @@ describe('nappConfig', () => {
 });
 
 describe('changeAllSettings', () => {
+    let configuration, nappConfig;
+    beforeAll(() => {
+        configuration = {
+            componentWillMount: true,
+            componentWillReceiveProps: true,
+            shouldComponentUpdate: true,
+            componentWillUpdate: true,
+            componentDidMount: true,
+            componentDidUpdate: true,
+            componentWillUnmount: true,
+            componentDidCatch: true,
+            autoGenerateTests: false,
+            currentProject: 'principia',
+            projects: {
+                principia: {
+                    rootDir: 'Users/newton/mathematica/principia',
+                    componentDir: 'Users/newton/mathematica/principia/components',
+                    testsDir: 'Users/newton/mathematica/principia/tests'
+                }
+            }
+        };
+        nappConfig = new Configstore('cas-napp-config');
+        nappConfig.set(configuration);
+    });
+
+    afterAll(() => {
+        nappConfig.clear()
+    });
+
     it('changes configuration lifecycle methods to true', () => {
         const expectedConfig = {
             componentWillMount: true,
@@ -118,6 +145,38 @@ describe('changeAllSettings', () => {
 });
 
 describe('ifPathExists', () => {
+    let configuration, nappConfig, fileType, projectName, filePath;
+    beforeAll(() => {
+        configuration = {
+            componentWillMount: true,
+            componentWillReceiveProps: true,
+            shouldComponentUpdate: true,
+            componentWillUpdate: true,
+            componentDidMount: true,
+            componentDidUpdate: true,
+            componentWillUnmount: true,
+            componentDidCatch: true,
+            autoGenerateTests: false,
+            currentProject: 'principia',
+            projects: {
+                principia: {
+                    rootDir: 'Users/newton/mathematica/principia',
+                    componentDir: 'Users/newton/mathematica/principia/components',
+                    testsDir: 'Users/newton/mathematica/principia/tests'
+                }
+            }
+        };
+        nappConfig = new Configstore('ipe-napp-config');
+        nappConfig.set(configuration);
+        fileType = 'COMPONENT';
+        projectName = 'principia';
+        filePath = 'Users/newton/mathematica/principia';
+    });
+
+    afterAll(() => {
+        nappConfig.clear()
+    });
+
     it('returns filePath if a valid filePath string is passed in', () => {
         const result = ifPathExists(fileType, configuration.projects, projectName, filePath);
 
@@ -146,6 +205,40 @@ describe('ifPathExists', () => {
 });
 
 describe('setupProject', () => {
+    let configuration, nappConfig, projectName;
+    beforeAll(() => {
+        configuration = {
+            componentWillMount: true,
+            componentWillReceiveProps: true,
+            shouldComponentUpdate: true,
+            componentWillUpdate: true,
+            componentDidMount: true,
+            componentDidUpdate: true,
+            componentWillUnmount: true,
+            componentDidCatch: true,
+            autoGenerateTests: false,
+            currentProject: 'principia',
+            projects: {
+                principia: {
+                    rootDir: 'Users/newton/mathematica/principia',
+                    componentDir: 'Users/newton/mathematica/principia/components',
+                    testsDir: 'Users/newton/mathematica/principia/tests'
+                }
+            }
+        };
+        nappConfig = new Configstore('sp-napp-config');
+        nappConfig.set(configuration);
+        projectName = 'principia';
+    });
+
+    afterEach(() => {
+        nappConfig.set(configuration);
+    });
+
+    afterAll(() => {
+        nappConfig.clear();
+    });
+
     it("set's the currentProject property of configstore to name", () => {
         const newProjectName = 'Arithmetica Universalis';
 
@@ -202,3 +295,4 @@ describe('setupProject', () => {
         expect(nappConfig.get('projects')).toEqual(expectedConfig.projects);
     });
 });
+
