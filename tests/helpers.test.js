@@ -112,6 +112,7 @@ describe('formatCompPath', () => {
                 }
             }
         };
+
         testNappConfig = new Configstore('fcp-napp-config');
         testNappConfig.set(configuration);
     });

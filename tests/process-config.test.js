@@ -52,10 +52,11 @@ describe('processConfig', () => {
         };
     });
 
+
     afterAll(() => {
         nappConfig.clear()
     });
-
+  
     beforeEach(() => fs.mkdirs(testCompsPath));
     afterEach(() => fs.remove(testCompsPath));
 

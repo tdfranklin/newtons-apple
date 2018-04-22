@@ -1,4 +1,3 @@
-
 const Configstore = require('configstore');
 const { formatCompPath } = require('../lib/helpers');
 const templateFactory = require('../lib/template-factory');
@@ -17,6 +16,7 @@ describe('getComponentTemplate', () => {
             componentWillUnmount: true,
             componentDidCatch: true
         };
+
         nappConfig = new Configstore('gct-napp-config');
         nappConfig.set({
             componentWillMount: true,

@@ -1,4 +1,5 @@
 
+
 const { changeAllSettings, ifPathExists, setupProject } = require('../bin/configstore');
 const path = require('path');
 const Configstore = require('configstore');
@@ -61,6 +62,7 @@ describe('nappConfig', () => {
 });
 
 describe('changeAllSettings', () => {
+
     let configuration, nappConfig;
     beforeAll(() => {
         configuration = {
@@ -145,6 +147,7 @@ describe('changeAllSettings', () => {
 });
 
 describe('ifPathExists', () => {
+
     let configuration, nappConfig, fileType, projectName, filePath;
     beforeAll(() => {
         configuration = {
@@ -205,6 +208,7 @@ describe('ifPathExists', () => {
 });
 
 describe('setupProject', () => {
+
     let configuration, nappConfig, projectName;
     beforeAll(() => {
         configuration = {
@@ -284,15 +288,16 @@ describe('setupProject', () => {
             }
         };
 
+
         expect(nappConfig.get('projects')['Arithmetica Universalis']).not.toBeDefined();
         setupProject(
             false,
             newProjectName,
             newProjectCompPath,
             newProjectTestsPath,
+
             nappConfig
         );
         expect(nappConfig.get('projects')).toEqual(expectedConfig.projects);
     });
 });
-
