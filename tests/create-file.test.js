@@ -53,7 +53,8 @@ describe('createFile', () => {
             });
         };
 
-        nappConfig = new Configstore('test-napp-config');
+
+        nappConfig = new Configstore('cf-napp-config');
         nappConfig.set({
             componentWillMount: true,
             componentWillReceiveProps: true,
@@ -75,6 +76,11 @@ describe('createFile', () => {
         });
     });
 
+
+    afterAll(() => {
+        nappConfig.clear()
+    });
+  
     beforeEach(() => fs.mkdirs(tempTestsDirPath));
     afterEach(() => fs.remove(tempTestsDirPath));
 

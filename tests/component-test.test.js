@@ -5,7 +5,7 @@ const componentTestTemplate = require('../templates/component-test');
 describe('componentTestTemplate', () => {
     let nappConfig;
     beforeAll(() => {
-        nappConfig = new Configstore('test-napp-config');
+        nappConfig = new Configstore('ctt-napp-config');
         nappConfig.set({
             componentWillMount: true,
             componentWillReceiveProps: true,
@@ -27,6 +27,9 @@ describe('componentTestTemplate', () => {
         });
     });
 
+    afterAll(() => {
+        nappConfig.clear()
+    });
     it('includes the correct name variable', () => {
         const name = 'ComplicatedButton';
         const compTestReturnVal = componentTestTemplate(name, nappConfig);

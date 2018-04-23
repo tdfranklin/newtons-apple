@@ -16,7 +16,8 @@ describe('getComponentTemplate', () => {
             componentWillUnmount: true,
             componentDidCatch: true
         };
-        nappConfig = new Configstore('test-napp-config');
+
+        nappConfig = new Configstore('gct-napp-config');
         nappConfig.set({
             componentWillMount: true,
             componentWillReceiveProps: true,
@@ -36,6 +37,10 @@ describe('getComponentTemplate', () => {
                 }
             }
         });
+    });
+
+    afterAll(() => {
+        nappConfig.clear()
     });
 
     it('calls the dumbComponentTemplate correctly', () => {

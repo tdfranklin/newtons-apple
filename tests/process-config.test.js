@@ -7,7 +7,7 @@ describe('processConfig', () => {
     let fileName, nappConfig, options, testCompsPath, compPath, pathCheck, readFile, timeOut;
     beforeAll(() => {
         fileName = 'ComplicatedButton';
-        nappConfig = new Configstore('test-napp-config');
+        nappConfig = new Configstore('pc-napp-config');
         nappConfig.set({
             componentWillMount: true,
             componentWillReceiveProps: true,
@@ -52,6 +52,11 @@ describe('processConfig', () => {
         };
     });
 
+
+    afterAll(() => {
+        nappConfig.clear()
+    });
+  
     beforeEach(() => fs.mkdirs(testCompsPath));
     afterEach(() => fs.remove(testCompsPath));
 
