@@ -21,7 +21,6 @@ program
     .option('-t, --test', 'creates test file for new component')
     .action((componentName, options) => {
         argValue = 'new';
-
         processConfig('COMPONENT', componentName, options, nappConfig);
     });
 
